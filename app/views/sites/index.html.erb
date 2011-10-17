@@ -1,0 +1,14 @@
+<p><%= link_to 'Home', root_url(:subdomain => false) %></p>
+<h1>Site: <%= @site.name %>  Users</h1>
+
+<table>
+<% @site.users.each do |user| %>
+  <tr>
+    <td><%= link_to user.name, user %>
+      <%if user.id == @site.user_id%>
+        isSiteAdmin
+      <% end %>
+      </td>
+  </tr>
+<% end %>
+</table>
