@@ -37,10 +37,3 @@ class User < ActiveRecord::Base
   end
   
 end
-
-
-  # def self.find_for_authentication(conditions={})
-  #   #conditions[:active] = true
-  #   logger.info conditions.inspect
-  #   super
-  # end
