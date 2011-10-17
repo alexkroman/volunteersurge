@@ -1,10 +1,7 @@
 class ApplicationController < ActionController::Base
-  include UrlHelper
   protect_from_forgery
   helper_method :current_subdomain, :check_my_subdomain
   before_filter :current_subdomain
-  before_filter :set_mailer_url_options
-
 
   def current_subdomain
       if request.subdomains.first.present? && request.subdomains.first != "www"
@@ -20,7 +17,6 @@ class ApplicationController < ActionController::Base
       redirect_to "/opps" , :alert => "Sorry, resource is not part of your subdomain"
     end
   end
-
 
   def after_sign_in_path_for(resource_or_scope)
     scope = Devise::Mapping.find_scope!(resource_or_scope)

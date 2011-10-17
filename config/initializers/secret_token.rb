@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Rails3SubdomainDevise::Application.config.secret_token = '1fef09f03b01ba6aa2fbad70aa34b3a1d28076a40fd507b6805260edd6f06220621f7f09ef0091747afb50e06f424ad042bb05651520f4d1c0aec23bac4946ad'
+Rails3SubdomainDevise::Application.config.secret_token = '1c5bb85d82dfc7e8deb273ead77a44f572a23da7c493b5f840b8f2eae64154de41ccac481ed674c763d0164c45f3a88e0bf73ed5db33be22254cb6dd7503fd00'

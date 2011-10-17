@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
   belongs_to :subdomain
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates_presence_of :name
   validates_presence_of :subdomain_name, :on => :create # used to create a subdomain
-  validates_uniqueness_of  :email, :case_sensitive => false
   attr_accessor :subdomain_name  # used to create a subdomain
-  attr_accessible :name, :subdomain_name, :email, :password, :password_confirmation, :loginable_token
+  attr_accessible :name, :subdomain_name, :email, :password, :password_confirmation, :remember_me, :loginable_token
   before_create :create_subdomain
   after_create :update_subdomain_owner
 
