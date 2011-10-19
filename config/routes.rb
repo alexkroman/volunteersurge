@@ -11,6 +11,8 @@ Rails3SubdomainDevise::Application.routes.draw do
     match '/opps' => 'sites#opps'
   end
   
+  resources :events
+  
   root :to => "home#index"
 
   # The priority is based upon order of creation:

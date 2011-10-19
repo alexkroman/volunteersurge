@@ -7,4 +7,6 @@ gem 'rails'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'devise'
 gem 'friendly_id'
+gem 'annotate'
+gem 'jquery-rails'
 gem 'heroku', :group => :development
