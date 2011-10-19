@@ -2,4 +2,5 @@
 // This file is automatically included by javascript_include_tag :defaults
 //= require jquery
 //= require jquery_ujs
+//= require_tree
 //= require jquery-ui
