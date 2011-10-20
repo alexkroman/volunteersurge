@@ -9,4 +9,6 @@ gem 'devise'
 gem 'friendly_id'
 gem 'annotate'
 gem 'jquery-rails'
+gem 'schedule_atts'
+gem 'ice_cube'
 gem 'heroku', :group => :development

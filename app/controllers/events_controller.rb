@@ -13,6 +13,9 @@ class EventsController < ApplicationController
     else
       @event_series = EventSeries.new(params[:event])
     end
+    respond_to do |format|
+      format.js
+    end
   end
   
   def index
@@ -24,7 +27,9 @@ class EventsController < ApplicationController
     @events.each do |event|
       events << {:id => event.id, :title => event.title, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id)? true: false}
     end
-    render :text => events.to_json
+    respond_to do |format|
+      format.json {render :json => events.to_json}
+    end
   end
   
   def move
@@ -35,6 +40,9 @@ class EventsController < ApplicationController
       @event.all_day = params[:all_day]
       @event.save
     end
+    respond_to do |format|
+      format.js
+    end
   end
     
   def resize
@@ -42,11 +50,17 @@ class EventsController < ApplicationController
     if @event
       @event.endtime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.endtime))
       @event.save
-    end    
+    end
+    respond_to do |format|
+      format.js
+    end
   end
   
   def edit
-    @event = Event.find_by_id(params[:id])
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
   
   def update

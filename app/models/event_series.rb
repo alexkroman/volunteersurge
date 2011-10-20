@@ -18,8 +18,10 @@ class EventSeries < ActiveRecord::Base
   
   validates_presence_of :frequency, :period, :starttime, :endtime
   validates_presence_of :title, :description
-  
   has_many :events, :dependent => :destroy
+  after_create :after_create
+  
+  END_TIME = Date.parse("1 Jan, 2020").to_time
   
   def after_create
     create_events_until(END_TIME)
@@ -30,8 +32,8 @@ class EventSeries < ActiveRecord::Base
     et = endtime
     p = r_period(period)
     nst, net = st, et
-    
     while frequency.send(p).from_now(st) <= end_time
+      
 #      puts "#{nst}           :::::::::          #{net}" if nst and net
       self.events.create(:title => title, :description => description, :all_day => all_day, :starttime => nst, :endtime => net)
       nst = st = frequency.send(p).from_now(st)

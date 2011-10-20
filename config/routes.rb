@@ -11,7 +11,12 @@ Rails3SubdomainDevise::Application.routes.draw do
     match '/opps' => 'sites#opps'
   end
   
-  resources :events
+  resources :events do
+    member do
+      post :move
+      post :resize
+    end
+  end
   
   root :to => "home#index"
 

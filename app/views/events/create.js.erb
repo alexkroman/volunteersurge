@@ -1,0 +1,17 @@
+<% if @event %>
+  <% if @event.save %>
+    $('#calendar').fullCalendar( 'refetchEvents');
+    $('#create_event_dialog').dialog('destroy');
+  <% else %>
+    alert(@event.errors.full_messages(',').join("\n"));
+  <% end %>
+<% end %>
+
+<% if @event_series %>
+  <% if @event_series.save %>
+    $('#calendar').fullCalendar( 'refetchEvents');
+    $('#create_event_dialog').dialog('destroy');
+  <% else %>
+    alert(@event_series.errors.full_messages(',').join("\n"));
+  <% end %>
+<% end %>

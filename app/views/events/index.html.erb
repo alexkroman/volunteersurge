@@ -9,6 +9,7 @@
       // page is now ready, initialize the calendar...
       $('#calendar').fullCalendar({
           editable: true,
+          theme: true,
           header: {
               left: 'prev,next today',
               center: 'title',
@@ -16,7 +17,7 @@
           },
           defaultView: 'agendaWeek',
           height: 500,
-          slotMinutes: 15,
+          slotMinutes: 60,
           loading: function(bool){
               if (bool) 
                   $('#loading').show();
