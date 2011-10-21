@@ -1,11 +1,14 @@
+<h1><%= current_subdomain.name %></h1>
 <p>
-  <%=link_to 'Create Event', new_event_path, :remote => true, :before => "$('#loading').show()", :complete => "$('#loading').hide()", :id => 'create-event' %>
+  <%=link_to 'Create Volunteer Event', new_event_path, :remote => true, :before => "$('#loading').show()", :complete => "$('#loading').hide()", :id => 'create-event' %>
 </p>
 
 <script>
   
   
-  $(document).ready(function(){    
+  $(document).ready(function(){ 
+    	$( "#create-event" ).button();
+       
       // page is now ready, initialize the calendar...
       $('#calendar').fullCalendar({
           editable: true,

@@ -7,8 +7,7 @@ gem 'rails'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'devise'
 gem 'friendly_id'
-gem 'annotate'
 gem 'jquery-rails'
-gem 'recurrence'
-gem 'ice_cube'
+gem "ice_cube", "~> 0.6.13"
+
 gem 'heroku', :group => :development

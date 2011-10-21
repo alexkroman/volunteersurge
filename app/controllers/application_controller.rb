@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       current_user.save
       sign_out(current_user)
       flash[:notice] = nil
-      home_path = valid_user_url(token, :subdomain => subdomain_name)
+      home_path = valid_user_url(token, :subdomain => current_user.subdomain_name)
       return home_path 
     else
       if current_user.subdomain != current_subdomain 

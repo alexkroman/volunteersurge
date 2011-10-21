@@ -13,11 +13,12 @@
 ActiveRecord::Schema.define(:version => 20100930104337) do
 
   create_table "event_series", :force => true do |t|
-    t.integer  "frequency",  :default => 1
-    t.string   "period",     :default => "monthly"
+    t.integer  "frequency",    :default => 1
+    t.string   "period",       :default => "monthly"
     t.datetime "starttime"
     t.datetime "endtime"
-    t.boolean  "all_day",    :default => false
+    t.boolean  "all_day",      :default => false
+    t.integer  "subdomain_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20100930104337) do
     t.datetime "starttime"
     t.datetime "endtime"
     t.boolean  "all_day",         :default => false
+    t.integer  "subdomain_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
@@ -59,7 +61,6 @@ ActiveRecord::Schema.define(:version => 20100930104337) do
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"

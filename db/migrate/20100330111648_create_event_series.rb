@@ -6,7 +6,7 @@ class CreateEventSeries < ActiveRecord::Migration
       t.datetime :starttime
       t.datetime :endtime
       t.boolean :all_day, :default => false
-
+      t.references :subdomain
       t.timestamps
     end
     

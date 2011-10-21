@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :title, :url
       t.datetime :starttime, :endtime
       t.boolean :all_day, :default => false
+      t.references :subdomain
       t.timestamps
     end
   end

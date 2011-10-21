@@ -20,6 +20,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :title, :description
   
   belongs_to :event_series
+  belongs_to :subdomain
   
   REPEATS = [
               "Does not repeat",
