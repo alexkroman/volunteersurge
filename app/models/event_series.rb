@@ -19,35 +19,19 @@ class EventSeries < ActiveRecord::Base
   validates_presence_of :frequency, :period, :starttime, :endtime
   validates_presence_of :title, :description
   has_many :events, :dependent => :destroy
-  after_create :after_create
+  after_create :create_events
   
-  END_TIME = Date.parse("1 Jan, 2020").to_time
   
-  def after_create
-    create_events_until(END_TIME)
-  end
-  
-  def create_events_until(end_time)
-    st = starttime
-    et = endtime
-    p = r_period(period)
-    nst, net = st, et
-    while frequency.send(p).from_now(st) <= end_time
+  def create_events
+    logger.info "============================================HI"
+    
+    rule = IceCube::Rule.daily
       
-#      puts "#{nst}           :::::::::          #{net}" if nst and net
-      self.events.create(:title => title, :description => description, :all_day => all_day, :starttime => nst, :endtime => net)
-      nst = st = frequency.send(p).from_now(st)
-      net = et = frequency.send(p).from_now(et)
-      
-      if period.downcase == 'monthly' or period.downcase == 'yearly'
-        begin 
-          nst = DateTime.parse("#{starttime.hour}:#{starttime.min}:#{starttime.sec}, #{starttime.day}-#{st.month}-#{st.year}")  
-          net = DateTime.parse("#{endtime.hour}:#{endtime.min}:#{endtime.sec}, #{endtime.day}-#{et.month}-#{et.year}")
-        rescue
-          nst = net = nil
-        end
-      end
-    end
+    schedule = IceCube::Schedule.new
+    schedule.add_recurrence_rule rule
+    
+    logger.info schedule.occurrences(Time.local(2015, 1, 1)).size
+  
   end
   
   def r_period(period)

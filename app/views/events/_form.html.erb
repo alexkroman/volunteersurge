@@ -1,5 +1,4 @@
 <%= form_for @event, :url => {:action => :create}, :before => "$('#creating_events').show();", :complete => "$('#creating_events').hide();", :remote => true do |f| %>
-<%= @event.schedule_attributes %>
 <p>
   <%=f.label :title %>
   <br/>

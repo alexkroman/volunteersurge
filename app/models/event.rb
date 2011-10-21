@@ -15,7 +15,6 @@
 #
 
 class Event < ActiveRecord::Base
-  include ScheduleAttributes
   attr_accessor :period, :frequency, :commit_button, :schedule_yaml
   
   validates_presence_of :title, :description
