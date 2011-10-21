@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100930104337) do
+ActiveRecord::Schema.define(:version => 20111021213500) do
 
   create_table "event_series", :force => true do |t|
     t.integer  "frequency",    :default => 1
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20100930104337) do
     t.string   "title"
     t.datetime "starttime"
     t.datetime "endtime"
+    t.integer  "capacity"
     t.boolean  "all_day",         :default => false
     t.integer  "subdomain_id"
     t.datetime "created_at"
@@ -36,6 +37,13 @@ ActiveRecord::Schema.define(:version => 20100930104337) do
   end
 
   add_index "events", ["event_series_id"], :name => "index_events_on_event_series_id"
+
+  create_table "signups", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "slugs", :force => true do |t|
     t.string   "name"
@@ -51,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20100930104337) do
 
   create_table "subdomains", :force => true do |t|
     t.string   "name"
+    t.string   "organization"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

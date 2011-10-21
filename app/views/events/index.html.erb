@@ -1,15 +1,12 @@
 <h1><%= current_subdomain.name %></h1>
 <p>
-  <%=link_to 'Create Volunteer Event', new_event_path, :remote => true, :before => "$('#loading').show()", :complete => "$('#loading').hide()", :id => 'create-event' %>
+
 </p>
 
 <script>
-  
-  
   $(document).ready(function(){ 
-    	$( "#create-event" ).button();
+    	$( ".button" ).button();
        
-      // page is now ready, initialize the calendar...
       $('#calendar').fullCalendar({
           editable: true,
           theme: true,
@@ -18,7 +15,7 @@
               center: 'title',
               right: 'month,agendaWeek,agendaDay'
           },
-          defaultView: 'agendaWeek',
+          defaultView: 'month',
           height: 500,
           slotMinutes: 60,
           loading: function(bool){
@@ -31,21 +28,11 @@
           timeFormat: 'h:mm t{ - h:mm t} ',
           dragOpacity: "0.5",
           eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
-//              if (confirm("Are you sure about this change?")) {
                   moveEvent(event, dayDelta, minuteDelta, allDay);
-//              }
-//              else {
-//                  revertFunc();
-//              }
           },
           
           eventResize: function(event, dayDelta, minuteDelta, revertFunc){
-//              if (confirm("Are you sure about this change?")) {
                   resizeEvent(event, dayDelta, minuteDelta);
-//              }
-//              else {
-//                  revertFunc();
-//              }
           },
           
           eventClick: function(event, jsEvent, view){
@@ -58,6 +45,19 @@
       });
   });
 </script>
+
+<% if @signups and @signups.size > 0 %>
+  <h2>Your upcoming shifts</h2>
+  <% @signups.each do |signup| %>
+    <%= signup.event.title %> at <%= signup.event.starttime %> <%= link_to 'Cancel this shift', cancel_signup_event_path(signup) %>
+  <% end %>
+  
+  <br />
+  <br />
+  <br />
+
+<% end %>
+
 <div>
   <div id='calendar'>
   </div>

@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   
   def new
-    @event = current_subdomain.events.new(:endtime => 1.hour.from_now, :period => "Does not repeat")
+    @event = current_subdomain.events.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")
     respond_to do |format|
       format.js
     end
@@ -19,17 +19,30 @@ class EventsController < ApplicationController
   end
   
   def index
+    @signups = current_user.signups if user_signed_in?
   end
   
   def show
     @events = current_subdomain.events.find(:all, :conditions => ["starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' and endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"] )
     events = [] 
     @events.each do |event|
-      events << {:id => event.id, :title => event.title, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id)? true: false}
+      events << {:id => event.id, :title => event.title_with_capacity, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id)? true: false}
     end
     respond_to do |format|
       format.json {render :json => events.to_json}
     end
+  end
+  
+  def signup
+    @event = current_subdomain.events.find_by_id params[:id]
+    current_user.events << @event
+    current_user.save
+    redirect_to events_path
+  end
+  
+  def cancel_signup
+    current_user.signups.find(params[:id]).destroy
+    redirect_to events_path
   end
   
   def move

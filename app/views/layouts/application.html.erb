@@ -1,21 +1,42 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
 <head>
-  <title>VolunteerSurge</title>
-  <%= stylesheet_link_tag    "application" %>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <%= stylesheet_link_tag    "reset" %>
+  <%= stylesheet_link_tag    "text" %>
+  <%= stylesheet_link_tag    "960_24_col" %>
   <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag 'fullcalendar', 'gcal' %>
-  <%= stylesheet_link_tag "style", 'fullcalendar' %>
+  <%= stylesheet_link_tag "application", 'fullcalendar' %>
   <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" %>
   <%= csrf_meta_tags %>
-</head>
+ </head>
 <body>
-  <ul class="hmenu">
-    <%= render 'devise/menu/registration_items' %>
-    <%= render 'devise/menu/login_items' %>
-  </ul>
-  <p style="color: green"><%= notice %></p>
-  <p style="color: red"><%= alert %></p>
-  <%= yield %>
+  <div id="wrapper">
+    <div id="content">
+      <div class="header">
+        <div class="container_24">
+            <div class="links grid_20 alpha">
+                <%= render 'devise/menu/registration_items' %>
+                <%= render 'devise/menu/login_items' %>                                                             
+            </div>
+            <div class="logo grid_4 omega"><a href="/">VolunteerSurge</a></div>
+        </div>
+      </div>
+      
+
+      <div class="container_24">
+        <div class="grid_20 prefix_2 suffix_2 alpha content">
+          <p style="color: green"><%= notice %></p>
+          <p style="color: red"><%= alert %></p>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer" class="clearfix">
+    <div class="container_24">
+      VolunteerSurge
+    </div>
+  </div>
 </body>
 </html>

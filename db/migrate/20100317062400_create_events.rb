@@ -3,6 +3,7 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :title, :url
       t.datetime :starttime, :endtime
+      t.integer :capacity
       t.boolean :all_day, :default => false
       t.references :subdomain
       t.timestamps

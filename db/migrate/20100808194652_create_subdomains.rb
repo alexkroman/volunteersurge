@@ -2,6 +2,7 @@ class CreateSubdomains < ActiveRecord::Migration
   def self.up
     create_table :subdomains do |t|
       t.string :name
+      t.string :organization
       t.references :user
 
       t.timestamps

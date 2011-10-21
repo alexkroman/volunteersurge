@@ -23,6 +23,10 @@
   <%=f.label :all_day %>
   <%=f.check_box :all_day %>
 </p>
+<p>
+  <%=f.label :capacity %>
+  <%=f.text_field :capacity %>
+</p>
 <%if false%>
 <%period = (@event.event_series)?@event.event_series.period : nil -%>
 <p>

@@ -1,9 +1,109 @@
-ul.hmenu {
-  list-style: none;	
-  margin: 0 0 2em;
-  padding: 0;
+body {
+	margin:0;
+	font-family: "minion-pro-1","minion-pro-2","Times New Roman", Georgia, serif;
 }
 
-ul.hmenu li {
-  display: inline;  
+#loading{
+  position: absolute; 
+  right: 0px; 
+  top: 0px; 
+  background-color: #dd0000; 
+  font-weight:bold;
+  color: white; 
+  margin: 5px; 
+  padding: 3px;
 }
+
+span > div#loading {
+  position: fixed;
+}
+
+a {
+	text-decoration: none;
+	color: #4D769F;
+}
+
+a:hover {
+	color: #003399;
+}
+
+div.logo {
+	color: #000;
+	font-family: "Droid Sans", Helvetica, sans-serif;
+	font-size: 1.8em;
+	margin-top: 9px;
+}
+
+div.logo a{
+	color: #000;
+	text-decoration: none;
+}
+
+div.header {
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	background-color: #eee;
+}
+
+div.links {
+	font-size: 1.4em;
+	margin-top: 12px;
+	margin-bottom: 10px;
+}
+
+div.links a {
+	color: #000;
+	margin-right: 30px;
+	text-decoration: none;
+}
+
+div.links a:hover {
+	border-bottom: 2px solid #1C94C4;
+}
+
+div.links a.sign_up  {
+	color: #BCFC3D;
+}
+
+h1 {
+	font-style: normal;
+	font-weight: 500;
+	font-size: 3.5em;
+	margin: 20px 0 40px 0;
+	color: #232323;
+	line-height: 1.1em;
+}
+
+.content {
+	font-size: 1em;
+	margin-bottom: 50px;
+}
+
+html, body, #wrapper {height: 100%;}
+
+body > #wrapper { height: auto; min-height: 100%; }
+
+/* must be same height as the footer */
+#content { overflow: auto; padding-bottom: 30px; } 
+
+#footer {
+	position: relative;
+	margin-top: -30px; /* negative value of footer height */
+	height: 30px;
+	clear: both;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	color: #777;
+	font-size: .9em;
+	background-color: #FEFFE5;
+	text-align: center;
+	padding-top: 20px;
+} 
+
+/*Opera Fix*/
+body:before { /* thanks to Maleika (Kohoutec)*/
+	 content: "";
+	 height:100%;
+	 float: left;
+	 width: 0;
+	 margin-top: -32767px; /* thank you Erik J */
+}
+

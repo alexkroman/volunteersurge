@@ -21,6 +21,7 @@ class Event < ActiveRecord::Base
   
   belongs_to :event_series
   belongs_to :subdomain
+  has_many :signups
   
   REPEATS = [
               "Does not repeat",
@@ -29,6 +30,14 @@ class Event < ActiveRecord::Base
               "Monthly"        ,
               "Yearly"         
   ]
+  
+  def title_with_capacity
+    "#{self.title}, #{self.spots_left} left"
+  end
+  
+  def spots_left
+    capacity - signups.size
+  end
   
   def validate
     if (starttime >= endtime) and !all_day
@@ -48,7 +57,6 @@ class Event < ActiveRecord::Base
           nst = DateTime.parse("#{e.starttime.hour}:#{e.starttime.min}:#{e.starttime.sec}, #{st.day}-#{st.month}-#{st.year}")  
           net = DateTime.parse("#{e.endtime.hour}:#{e.endtime.min}:#{e.endtime.sec}, #{et.day}-#{et.month}-#{et.year}")
         end
-        #puts "#{nst}           :::::::::          #{net}"
       rescue
         nst = net = nil
       end

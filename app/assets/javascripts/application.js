@@ -4,6 +4,10 @@
 //= require jquery_ujs
 //= require_tree
 //= require jquery-ui
+//= require jquery.ui.datepicker
+//= require fullcalendar
+//= require gcal
+//= require jquery-ui-timepicker-addon
 
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
@@ -28,16 +32,16 @@ function resizeEvent(event, dayDelta, minuteDelta){
 
 function showEventDetails(event){
     $('#event_desc').html(event.description);
-    $('#edit_event').html("<a href = 'javascript:void(0);' onclick ='editEvent(" + event.id + ")'>Edit</a>");
+    $('#edit_event').html("<a href ='/events/" + event.id + "/signup' class='button'>Signup</a> <a href = 'javascript:void(0);' class='button' onclick ='editEvent(" + event.id + ")'>Edit</a>");
     if (event.recurring) {
         title = event.title + "(Recurring)";
-        $('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This Occurrence</a>");
-        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All In Series</a>")
-        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
+        $('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This Occurrence</a>");
+        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All In Series</a>")
+        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
     }
     else {
         title = event.title;
-        $('#delete_event').html("<a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
+        $('#delete_event').html("<a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
     }
     $('#desc_dialog').dialog({
         title: title,
@@ -46,7 +50,9 @@ function showEventDetails(event){
         close: function(event, ui){
             $('#desc_dialog').dialog('destroy')
         }
-    });   
+    }); 
+  	$( ".button" ).button();
+  
 }
 
 
