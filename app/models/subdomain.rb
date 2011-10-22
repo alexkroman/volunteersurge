@@ -1,5 +1,6 @@
 class Subdomain < ActiveRecord::Base
   has_many :users
+  has_one :user
   has_many :events
   has_many :event_series
   has_many :signups

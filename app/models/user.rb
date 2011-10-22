@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   belongs_to :subdomain
-
+  belongs_to_multitenant :subdomain
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates_presence_of :name
@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
     subdomain = self.subdomain
     if subdomain && subdomain.user_id.nil?
       subdomain.user_id = self.id
+      self.admin = true
+      self.save
       subdomain.save
     end
   end

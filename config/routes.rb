@@ -17,7 +17,9 @@ Rails3SubdomainDevise::Application.routes.draw do
       post :move
       post :resize
       get :signup
+      get :signup_all
       get :cancel_signup
+      get :cancel_all_signups
     end
   end
   

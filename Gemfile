@@ -9,5 +9,9 @@ gem 'devise'
 gem 'friendly_id'
 gem 'jquery-rails'
 gem "ice_cube", "~> 0.6.13"
-
+gem 'cancan'
+gem 'multitenant'
+gem 'formtastic'
+gem 'datagrid'
+gem 'rufus-scheduler'
 gem 'heroku', :group => :development

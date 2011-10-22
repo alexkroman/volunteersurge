@@ -5,6 +5,7 @@
 
   <% if current_subdomain %>
     <%= f.hidden_field :subdomain_name, :value => current_subdomain.name %>
+    <%= f.hidden_field :organization_name, :value => current_subdomain.organization %>
   <% else%>
     <p><%= f.label :subdomain %>
     <br /><%= f.text_field :subdomain_name %></p>

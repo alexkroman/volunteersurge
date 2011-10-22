@@ -1,5 +1,8 @@
 <% if user_signed_in? %>
-  <%=link_to 'Create Event', new_event_path, :remote => true, :class => 'button', :id => 'create-event' %>
+  <% if can? :create, Event %>
+    <%=link_to 'Create Event', new_event_path, :remote => true, :id => 'create-event' %>
+    <%=link_to 'View Volunteers', users_path %>
+  <% end %>
   <%= link_to('Edit account', edit_user_registration_path, :class => 'small') %>
 <% else %>
   <%= link_to('Sign Up', new_user_registration_path, :class => 'button')  %>

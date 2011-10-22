@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_subdomain, :check_my_subdomain
-  before_filter :current_subdomain
+  before_filter :current_subdomain, :find_tennant
 
   def not_found
     raise ActionController::RoutingError.new('Not Found')
@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
   def current_subdomain
     Subdomain.find_by_name!(request.subdomain) if request.subdomain.present?
   end      
+  
+  def find_tennant
+    Multitenant.current_tenant = current_subdomain
+  end
 
   def after_sign_in_path_for(resource_or_scope)
     if current_subdomain.nil? 

@@ -27,32 +27,6 @@ function resizeEvent(event, dayDelta, minuteDelta){
     });
 }
 
-function showEventDetails(event){
-    $('#event_desc').html(event.description);
-    $('#edit_event').html("<a href ='/events/" + event.id + "/signup' class='button'>Signup</a> <a href = 'javascript:void(0);' class='button' onclick ='editEvent(" + event.id + ")'>Edit</a>");
-    if (event.recurring) {
-        title = event.title + "(Recurring)";
-        $('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This Occurrence</a>");
-        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All In Series</a>")
-        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
-    }
-    else {
-        title = event.title;
-        $('#delete_event').html("<a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
-    }
-    $('#desc_dialog').dialog({
-        title: title,
-        modal: true,
-        width: 500,
-        close: function(event, ui){
-            $('#desc_dialog').dialog('destroy')
-        }
-    }); 
-  	$( ".button" ).button();
-  
-}
-
-
 function editEvent(event_id){
     jQuery.ajax({
         dataType: 'script',
@@ -94,8 +68,3 @@ function showPeriodAndFrequency(value){
             $('#frequency').hide();
     }  
 }
-
-$(document).ready(function(){ 
-  	$(".button").button();
-}
-

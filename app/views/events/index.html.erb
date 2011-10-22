@@ -6,9 +6,11 @@
 <script>
   $(document).ready(function(){ 
     	$( ".button" ).button();
+    	
+    	var editable = <%= can? :edit, Event ? 'true' : 'false' %>;
        
       $('#calendar').fullCalendar({
-          editable: true,
+          editable: editable,
           theme: true,
           header: {
               left: 'prev,next today',
@@ -44,12 +46,49 @@
       
       });
   });
+  
+  function showEventDetails(event){
+      $('#event_desc').html(event.description);
+      $('#signup_event').html("<a href ='/events/" + event.id + "/signup' class='button'>Signup for this event</a>");
+      <% if can? :edit, Event %>
+        $('#edit_event').html("<a href = 'javascript:void(0);' class='button' onclick ='editEvent(" + event.id + ")'>Edit</a>");
+      <% end %>
+      if (event.recurring) {
+          title = event.title + "(Recurring)";
+          $('#signup_recurring_event').html("<a href ='/events/" + event.id + "/signup_all' class='button'>Signup for all occurrences of this event</a>");
+          
+          <% if can? :edit, Event %>
+          $('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This Occurrence</a>");
+          $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All In Series</a>")
+          $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
+          <% end %>
+      }
+      else {
+        title = event.title;
+        <% if can? :delete, Event %>
+          $('#delete_event').html("<a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
+        <% end %>
+      }
+      $('#desc_dialog').dialog({
+          title: title,
+          modal: true,
+          width: 500,
+          close: function(event, ui){
+              $('#desc_dialog').dialog('destroy')
+          }
+      }); 
+    	$( ".button" ).button();
+
+  }
 </script>
 
 <% if @signups and @signups.size > 0 %>
   <h2>Your upcoming shifts</h2>
   <% @signups.each do |signup| %>
-    <%= signup.event.title %> at <%= signup.event.starttime %> <%= link_to 'Cancel this shift', cancel_signup_event_path(signup) %>
+    <p><%= signup.event.title %> at <%= signup.event.starttime %>
+       <%= link_to 'Cancel this shift', cancel_signup_event_path(signup) %>
+       <%= link_to 'Cancel all shifts', cancel_all_signups_event_path(signup) %>
+    </p>
   <% end %>
   
   <br />
@@ -68,6 +107,8 @@
   <br/>
   <br/>
   <div id = "event_actions">
+    <span id = "signup_event"></span>
+    <span id = "signup_recurring_event"></span>
     <span id = "edit_event"></span>
     <span id = "delete_event"></span>
   </div>

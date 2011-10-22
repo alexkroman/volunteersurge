@@ -3,6 +3,7 @@ class CreateSignups < ActiveRecord::Migration
     create_table :signups do |t|
       t.references :user
       t.references :event
+      t.references :event_series
       t.timestamps
     end
   end

@@ -4,7 +4,6 @@ class CreateSubdomains < ActiveRecord::Migration
       t.string :name
       t.string :organization
       t.references :user
-
       t.timestamps
     end
   end

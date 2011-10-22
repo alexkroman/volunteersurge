@@ -1,11 +1,12 @@
 class EventSeries < ActiveRecord::Base
-  attr_accessor :title, :description, :commit_button
+  attr_accessor :title, :description, :commit_button, :capacity
   
   validates_presence_of :frequency, :period, :starttime, :endtime
   validates_presence_of :title, :description
   
   has_many :events, :dependent => :destroy
   belongs_to :subdomain
+  belongs_to_multitenant :subdomain
   
   after_create :after_create
   
@@ -20,7 +21,7 @@ class EventSeries < ActiveRecord::Base
     nst, net = st, et
     
     while frequency.send(p).from_now(st) <= end_time
-      self.events.create(:subdomain_id => self.subdomain_id, :title => title, :description => description, :all_day => all_day, :starttime => nst, :endtime => net)
+      self.events.create(:subdomain_id => self.subdomain_id, :capacity => capacity, :title => title, :description => description, :all_day => all_day, :starttime => nst, :endtime => net)
       nst = st = frequency.send(p).from_now(st)
       net = et = frequency.send(p).from_now(et)
       

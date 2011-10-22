@@ -21,6 +21,7 @@ class Event < ActiveRecord::Base
   
   belongs_to :event_series
   belongs_to :subdomain
+  belongs_to_multitenant :subdomain
   has_many :signups
   
   REPEATS = [

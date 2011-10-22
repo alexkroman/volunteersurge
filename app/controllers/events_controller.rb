@@ -1,29 +1,33 @@
 class EventsController < ApplicationController
-  
+  authorize_resource
+    
   def new
-    @event = current_subdomain.events.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")
+    @event = Event.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")
     respond_to do |format|
       format.js
     end
+    authorize! :new, @event
   end
   
   def create
     if params[:event][:period] == "Does not repeat"
-      @event = current_subdomain.events.new(params[:event])
+      @event = Event.new(params[:event])
     else
-      @event_series = current_subdomain.event_series.new(params[:event])
+      @event_series = EventSeries.new(params[:event])
     end
     respond_to do |format|
       format.js
     end
+    authorize! :create, @event
   end
   
   def index
-    @signups = current_user.signups if user_signed_in?
+    @signups = current_user.signups.limit(10) if user_signed_in?
+    authorize! :read, @signups
   end
   
   def show
-    @events = current_subdomain.events.find(:all, :conditions => ["starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' and endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"] )
+    @events = Event.find(:all, :conditions => ["starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' and endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"] )
     events = [] 
     @events.each do |event|
       events << {:id => event.id, :title => event.title_with_capacity, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id)? true: false}
@@ -34,8 +38,15 @@ class EventsController < ApplicationController
   end
   
   def signup
-    @event = current_subdomain.events.find_by_id params[:id]
+    @event = Event.find_by_id params[:id]
     current_user.events << @event
+    current_user.save
+    redirect_to events_path
+  end
+  
+  def signup_all
+    @event = Event.find_by_id params[:id]
+    current_user.events << @event.event_series.events
     current_user.save
     redirect_to events_path
   end
@@ -45,8 +56,14 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
   
+  def cancel_all_signups
+    ids = Event.where({:event_series_id => current_user.signups.find(params[:id]).event.event_series.id}).collect{|x| x.id}
+    current_user.signups.find(ids).each(&:destroy)
+    redirect_to events_path
+  end
+  
   def move
-    @event = current_subdomain.events.find_by_id params[:id]
+    @event = Event.find_by_id params[:id]
     if @event
       @event.starttime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.starttime))
       @event.endtime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.endtime))
@@ -56,10 +73,11 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.js
     end
+    authorize! :create, @event
   end
     
   def resize
-    @event = current_subdomain.events.find_by_id params[:id]
+    @event = Event.find_by_id params[:id]
     if @event
       @event.endtime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.endtime))
       @event.save
@@ -67,17 +85,20 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.js
     end
+    authorize! :create, @event
+    
   end
   
   def edit
-    @event = current_subdomain.events.find(params[:id])
+    @event = Event.find(params[:id])
     respond_to do |format|
       format.js
     end
+    authorize! :edit, @event
   end
   
   def update
-    @event = current_subdomain.events.find_by_id(params[:event][:id])
+    @event = Event.find_by_id(params[:event][:id])
     if params[:event][:commit_button] == "Update All Occurrence"
       @events = @event.event_series.events #.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
       @event.update_events(@events, params[:event])
@@ -93,11 +114,12 @@ class EventsController < ApplicationController
       page<<"$('#calendar').fullCalendar( 'refetchEvents' )"
       page<<"$('#desc_dialog').dialog('destroy')" 
     end
-    
+    authorize! :update, @event
+  
   end  
   
   def destroy
-    @event = current_subdomain.events.find_by_id(params[:id])
+    @event = Event.find_by_id(params[:id])
     if params[:delete_all] == 'true'
       @event.event_series.destroy
     elsif params[:delete_all] == 'future'
@@ -112,6 +134,8 @@ class EventsController < ApplicationController
       page<<"$('#desc_dialog').dialog('destroy')" 
     end
     
+    authorize! :destroy, @event
+  
   end
   
 end
