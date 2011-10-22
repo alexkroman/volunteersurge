@@ -38,16 +38,16 @@ class EventsController < ApplicationController
   end
   
   def signup
-    @event = Event.find_by_id params[:id]
-    current_user.events << @event
-    current_user.save
+    @event = Event.find(params[:id])
+    Signup.create!(:event => @event, :event_series => @event.event_series, :user => current_user)
     redirect_to events_path
   end
   
   def signup_all
-    @event = Event.find_by_id params[:id]
-    current_user.events << @event.event_series.events
-    current_user.save
+    @event = Event.find(params[:id])
+    @event.event_series.events.each do |event|
+      Signup.create!(:user => current_user, :event => event, :event_series => event.event_series )
+    end
     redirect_to events_path
   end
   
@@ -57,8 +57,8 @@ class EventsController < ApplicationController
   end
   
   def cancel_all_signups
-    ids = Event.where({:event_series_id => current_user.signups.find(params[:id]).event.event_series.id}).collect{|x| x.id}
-    current_user.signups.find(ids).each(&:destroy)
+    series_id = current_user.signups.find(params[:id]).event_series.id
+    current_user.signups.where(:event_series_id => series_id).destroy_all
     redirect_to events_path
   end
   
