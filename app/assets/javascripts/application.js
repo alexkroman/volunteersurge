@@ -95,3 +95,7 @@ function showPeriodAndFrequency(value){
     }  
 }
 
+$(document).ready(function(){ 
+  	$(".button").button();
+}
+

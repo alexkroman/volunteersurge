@@ -2,6 +2,6 @@
   <%=link_to 'Create Event', new_event_path, :remote => true, :class => 'button', :id => 'create-event' %>
   <%= link_to('Edit account', edit_user_registration_path, :class => 'small') %>
 <% else %>
-  <%= link_to('Sign up to volunteer', new_user_registration_path, :class => 'small')  %>
+  <%= link_to('Sign Up', new_user_registration_path, :class => 'button')  %>
   <%= link_to('Login', new_user_session_path, :class => 'small')  %>  
 <% end %>
