@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
-  <%=link_to 'Create Event', new_event_path, :remote => true, :before => "$('#loading').show()", :complete => "$('#loading').hide()", :id => 'create-event' %>
-  <%= link_to('Edit account', edit_user_registration_path) %>
+  <%=link_to 'Create Event', new_event_path, :remote => true, :class => 'button', :id => 'create-event' %>
+  <%= link_to('Edit account', edit_user_registration_path, :class => 'small') %>
 <% else %>
-  <%= link_to('Sign up to volunteer', new_user_registration_path)  %>
-  <%= link_to('Login', new_user_session_path)  %>  
+  <%= link_to('Sign up to volunteer', new_user_registration_path, :class => 'small')  %>
+  <%= link_to('Login', new_user_session_path, :class => 'small')  %>  
 <% end %>

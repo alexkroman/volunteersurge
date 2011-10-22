@@ -5,12 +5,9 @@
 //= require_tree
 //= require jquery-ui
 //= require jquery.ui.datepicker
+//= require jquery.timePicker.min
 //= require fullcalendar
 //= require gcal
-//= require jquery-ui-timepicker-addon
-
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
 
 function moveEvent(event, dayDelta, minuteDelta, allDay){
     jQuery.ajax({

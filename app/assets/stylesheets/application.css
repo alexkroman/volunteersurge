@@ -31,7 +31,7 @@ div.logo {
 	color: #000;
 	font-family: "Droid Sans", Helvetica, sans-serif;
 	font-size: 1.8em;
-	margin-top: 9px;
+	margin-top: 12px;
 }
 
 div.logo a{
@@ -45,7 +45,7 @@ div.header {
 }
 
 div.links {
-	font-size: 1.4em;
+	font-size: 1.1em;
 	margin-top: 12px;
 	margin-bottom: 10px;
 }
@@ -56,7 +56,7 @@ div.links a {
 	text-decoration: none;
 }
 
-div.links a:hover {
+div.links a.small:hover {
 	border-bottom: 2px solid #1C94C4;
 }
 
