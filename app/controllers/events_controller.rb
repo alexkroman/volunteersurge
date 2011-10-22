@@ -18,15 +18,20 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.js
     end
-    authorize! :create, @event
   end
   
   def index
     @signups = current_user.signups.limit(10) if user_signed_in?
-    authorize! :read, @signups
   end
   
   def show
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def retrieve
     @events = Event.find(:all, :conditions => ["starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' and endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"] )
     events = [] 
     @events.each do |event|

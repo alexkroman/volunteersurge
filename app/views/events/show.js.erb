@@ -1,0 +1,30 @@
+$('#event_desc').html("<%= @event.description %>");
+$('#signup_event').html("<a href ='/events/" + <%= @event.id %> + "/signup' class='button'>Signup for this event</a>");
+
+<% if can? :edit, Event %>
+  $('#edit_event').html("<a href = 'javascript:void(0);' class='button' onclick ='editEvent(" + <%= @event.id %> + ")'>Edit</a>");
+<% end %>
+
+<% if @event.event_series.period != nil %>
+	$('#signup_recurring_event').html("<a href ='/events/" + <%= @event.id %> + "/signup_all' class='button'>Signup for all occurrences of this event</a>");
+	<% if can? :edit, Event %>
+	$('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", " + false + ")'>Delete Only This Occurrence</a>");
+	$('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", " + true + ")'>Delete All In Series</a>")
+	$('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", \"future\")'>Delete All Future Events</a>")
+	<% end %>
+<% else %>
+	<% if can? :delete, Event %>
+	  $('#delete_event').html("<a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", " + false + ")'>Delete</a>");
+	<% end %>	
+<% end %>
+
+$('#desc_dialog').dialog({
+    title: "<%= @event.title %>",
+    modal: true,
+    width: 500,
+    close: function(event, ui){
+        $('#desc_dialog').dialog('destroy')
+    }
+}); 
+
+$( ".button" ).button();

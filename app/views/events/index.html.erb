@@ -5,7 +5,6 @@
 
 <script>
   $(document).ready(function(){ 
-    	$( ".button" ).button();
     	
     	var editable = <%= can? :edit, Event ? 'true' : 'false' %>;
        
@@ -26,7 +25,7 @@
               else 
                   $('#loading').hide();
           },
-          events: "/events/get_events",
+          events: "/events/retrieve",
           timeFormat: 'h:mm t{ - h:mm t} ',
           dragOpacity: "0.5",
           eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
@@ -38,48 +37,15 @@
           },
           
           eventClick: function(event, jsEvent, view){
-              showEventDetails(event);
+              jQuery.ajax({
+                  type: 'get',
+                  url: "/events/" + event.id
+              });
           },
-      
-      
-      
-      
+
       });
   });
-  
-  function showEventDetails(event){
-      $('#event_desc').html(event.description);
-      $('#signup_event').html("<a href ='/events/" + event.id + "/signup' class='button'>Signup for this event</a>");
-      <% if can? :edit, Event %>
-        $('#edit_event').html("<a href = 'javascript:void(0);' class='button' onclick ='editEvent(" + event.id + ")'>Edit</a>");
-      <% end %>
-      if (event.recurring) {
-          title = event.title + "(Recurring)";
-          $('#signup_recurring_event').html("<a href ='/events/" + event.id + "/signup_all' class='button'>Signup for all occurrences of this event</a>");
-          
-          <% if can? :edit, Event %>
-          $('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This Occurrence</a>");
-          $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All In Series</a>")
-          $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
-          <% end %>
-      }
-      else {
-        title = event.title;
-        <% if can? :delete, Event %>
-          $('#delete_event').html("<a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
-        <% end %>
-      }
-      $('#desc_dialog').dialog({
-          title: title,
-          modal: true,
-          width: 500,
-          close: function(event, ui){
-              $('#desc_dialog').dialog('destroy')
-          }
-      }); 
-    	$( ".button" ).button();
 
-  }
 </script>
 
 <% if @signups and @signups.size > 0 %>

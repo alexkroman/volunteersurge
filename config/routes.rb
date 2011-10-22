@@ -13,6 +13,10 @@ Rails3SubdomainDevise::Application.routes.draw do
   end
   
   resources :events do
+    collection do
+      get :retrieve
+    end
+      
     member do
       post :move
       post :resize
