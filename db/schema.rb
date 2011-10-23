@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20111021213500) do
     t.integer  "user_id"
     t.integer  "event_id"
     t.integer  "event_series_id"
+    t.integer  "subdomain_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

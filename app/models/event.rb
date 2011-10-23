@@ -40,6 +40,10 @@ class Event < ActiveRecord::Base
     capacity - signups.size
   end
   
+  def spots_filled
+    signups.size
+  end
+  
   def validate
     if (starttime >= endtime) and !all_day
       errors.add_to_base("Start Time must be less than End Time")

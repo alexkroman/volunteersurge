@@ -12,6 +12,8 @@ Rails3SubdomainDevise::Application.routes.draw do
     match '/' => 'events#index'
   end
   
+  resources :dashboard
+  
   resources :events do
     collection do
       get :retrieve

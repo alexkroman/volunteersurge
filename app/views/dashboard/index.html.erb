@@ -1,0 +1,26 @@
+<h1>Dashboard</h1>
+
+<h2>Next shift</h2>
+<p><%= link_to @next_shifts.first.title, event_path(@next_shifts.first) %></p>
+
+
+<h2>Next 10 shifts</h2>
+<% @next_shifts.each do |shift| %>
+  <p><%= link_to shift.title, event_path(shift) %>
+  <br />
+  <%= shift.spots_filled %> out of <%= shift.capacity%> spots filled</p>
+<% end %>
+
+<h2>Recent signups</h2>
+<% @signups.each do |signup| %>
+  <p><%= link_to signup.user.name, user_path(signup.user) %>
+  <br />
+  signed up for <%= signup.event.title %> <%= time_ago_in_words signup.created_at %> ago</p>
+<% end %>
+
+<h2>Newest users</h2>
+<% @users.each do |user| %>
+  <p><%= link_to user.name, user_path(user) %>
+  <br />
+  signed up <%= time_ago_in_words user.created_at %> ago</p>
+<% end %>

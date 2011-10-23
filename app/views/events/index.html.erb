@@ -1,6 +1,8 @@
 <h1><%= current_subdomain.organization %></h1>
 <p>
-
+  <% if can? :create, Event %>
+    <%= link_to 'Create Event', new_event_path, :remote => true, :id => 'create-event', :class => 'button' %>
+  <% end %>
 </p>
 
 <script>
@@ -63,6 +65,8 @@
 
 <% end %>
 
+
+
 <div>
   <div id='calendar'>
   </div>
@@ -77,9 +81,5 @@
     <span id = "signup_recurring_event"></span>
     <span id = "edit_event"></span>
     <span id = "delete_event"></span>
-  </div>
-</div>
-<div id = "create_event_dialog" style ="display:none;">
-  <div id = "create_event">
   </div>
 </div>

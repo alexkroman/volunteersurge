@@ -15,11 +15,11 @@
     <div id="content">
       <div class="header">
         <div class="container_24">
-            <div class="links grid_20 alpha">
+            <div class="links grid_16 prefix_2 alpha">
                 <%= render 'devise/menu/registration_items' %>
                 <%= render 'devise/menu/login_items' %>                                                             
             </div>
-            <div class="logo grid_4 omega"><a href="/">VolunteerSurge</a></div>
+            <div class="logo grid_4 suffix_2 omega"><a href="/">VolunteerSurge</a></div>
         </div>
       </div>
       
@@ -37,10 +37,8 @@
       VolunteerSurge
     </div>
   </div>
-  <script>
-    $(document).ready(function(){ 
-      	$( ".button" ).button();
-    });
-  </script>
+  <div id = "create_event_dialog" style ="display:none;">
+    <div id = "create_event"></div>
+  </div>
 </body>
 </html>

@@ -3,6 +3,10 @@ body {
 	font-family: "minion-pro-1","minion-pro-2","Times New Roman", Georgia, serif;
 }
 
+p {
+	font-size: 1.3em;
+}
+
 #loading{
   position: absolute; 
   right: 0px; 
@@ -30,8 +34,9 @@ a:hover {
 div.logo {
 	color: #000;
 	font-family: "Droid Sans", Helvetica, sans-serif;
-	font-size: 1.8em;
-	margin-top: 5px;
+	font-size: 1.4em;
+	margin-top: 7px;
+	text-align: right;
 }
 
 div.logo a{
@@ -45,7 +50,7 @@ div.header {
 }
 
 div.links {
-	font-size: 1.1em;
+	font-size: 1em;
 	margin-top: 12px;
 	margin-bottom: 10px;
 }
@@ -57,25 +62,16 @@ div.links a {
 }
 
 div.links a.small:hover {
-	border-bottom: 2px solid #1C94C4;
-}
-
-div.links a.sign_up  {
-	color: #BCFC3D;
+	border-bottom: 2px solid #777;
 }
 
 h1 {
 	font-style: normal;
 	font-weight: 500;
-	font-size: 3.5em;
+	font-size: 2.5em;
 	margin: 20px 0 40px 0;
 	color: #232323;
 	line-height: 1.1em;
-}
-
-.content {
-	font-size: 1em;
-	margin-bottom: 50px;
 }
 
 html, body, #wrapper {height: 100%;}
@@ -83,19 +79,19 @@ html, body, #wrapper {height: 100%;}
 body > #wrapper { height: auto; min-height: 100%; }
 
 /* must be same height as the footer */
-#content { overflow: auto; padding-bottom: 30px; } 
+#content { overflow: auto; padding-bottom: 20px; } 
 
 #footer {
 	position: relative;
-	margin-top: -30px; /* negative value of footer height */
-	height: 30px;
+	margin-top: -20px; /* negative value of footer height */
+	height: 20px;
 	clear: both;
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
 	color: #777;
 	font-size: .9em;
-	background-color: #FEFFE5;
+	background-color: #eee;
 	text-align: center;
-	padding-top: 20px;
+	padding: 10px;
 } 
 
 /*Opera Fix*/

@@ -4,6 +4,7 @@ class CreateSignups < ActiveRecord::Migration
       t.references :user
       t.references :event
       t.references :event_series
+      t.references :subdomain
       t.timestamps
     end
   end
