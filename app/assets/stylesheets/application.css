@@ -91,6 +91,7 @@ body > #wrapper { height: auto; min-height: 100%; }
 	font-size: .9em;
 	background-color: #eee;
 	text-align: center;
+	margin-top: 20px;
 	padding: 10px;
 } 
 
