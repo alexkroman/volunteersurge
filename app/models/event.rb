@@ -31,7 +31,7 @@ class Event < ActiveRecord::Base
               "Monthly"        ,
               "Yearly"         
   ]
-  
+    
   def title_with_capacity
     "#{self.title}, #{self.spots_left} left"
   end

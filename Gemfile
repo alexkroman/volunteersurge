@@ -16,4 +16,5 @@ gem 'datagrid'
 gem 'rufus-scheduler'
 gem 'ruport'
 gem 'acts_as_reportable'
+gem 'will_paginate'
 gem 'heroku', :group => :development

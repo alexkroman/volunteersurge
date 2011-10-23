@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_subdomain, :check_my_subdomain
   before_filter :current_subdomain, :find_tennant
 
+  WillPaginate.per_page = 10
+
   def not_found
     raise ActionController::RoutingError.new('Not Found')
   end
@@ -32,6 +34,11 @@ class ApplicationController < ActionController::Base
       end
     end
     super
+  end
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied."
+    redirect_to root_url
   end
   
 end

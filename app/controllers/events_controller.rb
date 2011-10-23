@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
     
   def new
     @event = Event.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")

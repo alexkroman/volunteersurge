@@ -2,7 +2,7 @@
   <% if can? :create, Event %>
     <%=link_to 'Dashboard', dashboard_index_path, :class => 'small' %>
   <% end %>
-  <%=link_to 'Calendar of Events', events_path, :class => 'small' %>
+  <%=link_to 'Calendar', events_path, :class => 'small' %>
   <% if can? :create, Event %>
     <%=link_to 'All Volunteers', users_path, :class => 'small' %>    
   <% end %>

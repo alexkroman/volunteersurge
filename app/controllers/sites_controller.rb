@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+  load_and_authorize_resource
   
   before_filter :check_subdomain_exists?
   

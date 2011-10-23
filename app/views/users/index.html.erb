@@ -1,6 +1,2 @@
-<h1>All Volunteers</h1>
-<table>
-<% @users.each do |user| %>
- <p><%= link_to user.name, user %></p>
-<% end %>
-</table>
+<h2>All Volunteers</h2>
+<%= render 'table' %>
