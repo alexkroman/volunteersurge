@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
-    
+  set_tab :events
+  
   def new
     @event = Event.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")
     respond_to do |format|
@@ -67,34 +68,7 @@ class EventsController < ApplicationController
     current_user.signups.where(:event_series_id => series_id).destroy_all
     redirect_to events_path
   end
-  
-  def move
-    @event = Event.find_by_id params[:id]
-    if @event
-      @event.starttime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.starttime))
-      @event.endtime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.endtime))
-      @event.all_day = params[:all_day]
-      @event.save
-    end
-    respond_to do |format|
-      format.js
-    end
-    authorize! :create, @event
-  end
-    
-  def resize
-    @event = Event.find_by_id params[:id]
-    if @event
-      @event.endtime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.endtime))
-      @event.save
-    end
-    respond_to do |format|
-      format.js
-    end
-    authorize! :create, @event
-    
-  end
-  
+ 
   def edit
     @event = Event.find(params[:id])
     respond_to do |format|

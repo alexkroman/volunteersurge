@@ -3,7 +3,6 @@
   <title></title>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
   <%= stylesheet_link_tag    "reset" %>
-  <%= stylesheet_link_tag    "text" %>
   <%= stylesheet_link_tag    "960_24_col" %>
   <%= javascript_include_tag "application" %>  
   <%= stylesheet_link_tag "application", 'fullcalendar' %>
@@ -11,30 +10,39 @@
   <%= csrf_meta_tags %>
  </head>
 <body>
-  <div id="wrapper">
-    <div id="content">
-      <div class="header">
-        <div class="container_24">
-            <div class="links grid_16 prefix_2 alpha">
-                <%= render 'devise/menu/registration_items' %>
-                <%= render 'devise/menu/login_items' %>                                                             
-            </div>
-            <div class="logo grid_4 suffix_2 omega"><a href="/">VolunteerSurge</a></div>
+  <div class="header">
+    <div class="container_24">
+        <div class="grid_4 prefix_2 alpha">
+          <div class="logo"><a href="/"><% if current_subdomain %>
+             <%= current_subdomain.organization %>
+           <% else %>
+             VolunteerSurge
+           <% end %></a></div>
         </div>
-      </div>
-      
-
-      <div class="container_24">
-        <div class="grid_20 prefix_2 suffix_2 alpha content">
-          <p style="color: red"><%= alert %></p>
-          <%= yield %>
+        <div class="grid_16 suffix_2 omega right">
+          <% if user_signed_in? %>
+          <%= current_user.email %> |
+          <%=link_to 'My Shifts', users_path, :class => 'small' %> |   
+          <%= link_to('My Account', edit_user_registration_path, :class => 'small account') %> |
+          <%= link_to('Sign Out', destroy_user_session_path, :class => 'small account') %>        
+          <% end %>
         </div>
+        <div class="links grid_20 prefix_2 suffix_2 alpha">
+            <%= render 'devise/menu/registration_items' %>
+        </div>
+    </div>
+  </div>
+  <div class="container_24">
+    <div class="grid_20 prefix_2 suffix_2 alpha">
+      <div class="content">
+        <p style="color: red"><%= alert %></p>
+        <%= yield %>
       </div>
     </div>
   </div>
   <div id="footer" class="clearfix">
     <div class="container_24">
-      VolunteerSurge
+      Powered by VolunteerSurge
     </div>
   </div>
   <div id = "create_event_dialog" style ="display:none;">

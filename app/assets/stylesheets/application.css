@@ -1,68 +1,114 @@
 body {
 	margin:0;
-	font-family: "minion-pro-1","minion-pro-2","Times New Roman", Georgia, serif;
+	font-family: "Lucida Grande",verdana,arial,helvetica,sans-serif;
+	background-color:#e5e5e5;
 }
+
+#Tabs {
+padding: 0;
+}
+
+#Header {
+text-align: left;
+}
+
+#Tabs ul {
+margin: 0;
+padding: 0;
+}
+
+#Tabs li {
+margin: 0;
+padding: 0;
+display: inline;
+list-style: none;
+border: none;
+}
+
+ul#MainTabs .current, ul#MainTabs .current {
+float: left;
+font-size: 12px;
+line-height: 12px;
+color: #222;
+text-decoration: none;
+padding-bottom: 9px;
+background: #E5E5E5;
+font-weight:bold;
+padding: 5px 9px 7px;
+margin-right: 2px;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FDFDFD',endColorstr='#E5E5E5');
+background: -webkit-gradient(linear,left top,left bottom,from(#FDFDFD),to(#E5E5E5));
+background: -moz-linear-gradient(top,#FDFDFD,#E5E5E5);
+}
+
+#Tabs ul#MainTabs a:link, #Tabs ul#MainTabs a:visited {
+float: left;
+font-size: 12px;
+line-height: 12px;
+font-weight: normal;
+padding: 5px 9px 7px;
+margin-right: 2px;
+}
+
+#Tabs a:hover {
+color: #D6FFFF;
+background-color: #253966;
+}
+
+#Tabs a:link, #Tabs a:visited {
+background-color: #42577B;
+color: white;
+}
+
+table#data {
+	width: 100%;
+	margin-bottom: 20px;
+	font-size: .9em;
+}
+
+table#data th {
+	font-size: 1.1em;
+	font-weight: bold;
+	padding-bottom: 10px;
+	
+}
+
+table#data td {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+table#data tr.odd {
+	background-color: #fdfdf1;
+}
+
+
+
+.content {
+	background-color:white;
+	margin-top:15px;
+	padding:20px;
+	-moz-box-shadow: 3px 3px 4px #BBB;
+	-webkit-box-shadow: 3px 3px 4px #BBB;
+	box-shadow: 3px 3px 4px #BBB;
+	border-right: 1px solid #BBB;
+	border-bottom: 1px solid #BBB;
+}
+
+.button {
+	margin-bottom: 20px;
+}
+
+.ui-button-text {
+	font-size: .6em;
+}
+
+
 
 h2 {
 	color: #000;
-	margin-bottom: 0px;
-}
-
-#hor-minimalist-a
-{
-	font-size: 14px;
-	background: #fff;
-	width: 800px;
-	border-collapse: collapse;
-	text-align: left;
-}
-#hor-minimalist-a th
-{
-	font-size: 14px;
-	font-weight: normal;
-	color: #000;
-	padding: 10px 8px;
-	background-color: #eee;
-	border-bottom: 2px solid #000;
-}
-#hor-minimalist-a td
-{
-	color: #000;
-	padding: 9px 8px 0px 8px;
-}
-#hor-minimalist-a tbody tr:hover td
-{
-	color: #009;
-}
-
-
-#hor-minimalist-b
-{
-	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-	font-size: 12px;
-	background: #fff;
-	margin: 45px;
-	width: 480px;
-	border-collapse: collapse;
-	text-align: left;
-}
-#hor-minimalist-b th
-{
-	font-size: 14px;
-	font-weight: normal;
-	color: #039;
-	padding: 10px 8px;
-	border-bottom: 2px solid #6678b1;
-}
-#hor-minimalist-b td
-{
-	border-bottom: 1px solid #ccc;
-	color: #669;
-	padding: 6px 8px;
-}
-#hor-minimalist-b tbody tr:hover td
-{
-	color: #009;
+	margin-bottom: 20px;
+	font-size: 1.5em;
 }
 
 .order {
@@ -90,7 +136,7 @@ span > div#loading {
 
 a {
 	text-decoration: none;
-	color: #4D769F;
+	color: #485C8A;
 }
 
 a:hover {
@@ -99,36 +145,26 @@ a:hover {
 
 div.logo {
 	color: #000;
-	font-family: "Droid Sans", Helvetica, sans-serif;
-	font-size: 1.4em;
-	margin-top: 7px;
+	font-size: 1.6em;
+}
+
+.right {
+	font-size: .8em;
 	text-align: right;
 }
 
-div.logo a{
+div.logo a {
 	color: #000;
 	text-decoration: none;
 }
 
 div.header {
-	font-family: "Helvetica Neue", Helvetica, sans-serif;
-	background-color: #eee;
+	background-color: #C5E2E9;
+	padding-top: 5px;
 }
 
 div.links {
-	font-size: 1em;
 	margin-top: 12px;
-	margin-bottom: 10px;
-}
-
-div.links a {
-	color: #000;
-	margin-right: 30px;
-	text-decoration: none;
-}
-
-div.links a.small:hover {
-	border-bottom: 2px solid #777;
 }
 
 h1 {
@@ -140,33 +176,10 @@ h1 {
 	line-height: 1.1em;
 }
 
-html, body, #wrapper {height: 100%;}
-
-body > #wrapper { height: auto; min-height: 100%; }
-
-/* must be same height as the footer */
-#content { overflow: auto; padding-bottom: 20px; } 
-
 #footer {
-	position: relative;
-	margin-top: -20px; /* negative value of footer height */
-	height: 20px;
-	clear: both;
-	font-family: "Helvetica Neue", Helvetica, sans-serif;
 	color: #777;
-	font-size: .9em;
-	background-color: #eee;
+	font-size: .8em;
 	text-align: center;
-	margin-top: 20px;
-	padding: 10px;
+	margin-top: 30px;
+	padding-bottom: 10px;
 } 
-
-/*Opera Fix*/
-body:before { /* thanks to Maleika (Kohoutec)*/
-	 content: "";
-	 height:100%;
-	 float: left;
-	 width: 0;
-	 margin-top: -32767px; /* thank you Erik J */
-}
-

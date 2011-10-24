@@ -31,6 +31,10 @@ class Event < ActiveRecord::Base
               "Monthly"        ,
               "Yearly"         
   ]
+  
+  def self.upcoming
+    where(["starttime > ?", Time.now]).order('starttime asc')
+  end
     
   def title_with_capacity
     "#{self.title}, #{self.spots_left} left"

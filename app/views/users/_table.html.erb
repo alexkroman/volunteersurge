@@ -1,4 +1,4 @@
-<table id="hor-minimalist-a">
+<table id="data">
   <thead>
     <tr>
       <th scope="col">Name</th>
@@ -8,7 +8,7 @@
   </thead>
   <tbody>
     <% @users.each do |user| %>
-      <tr>
+      <tr class="<%= cycle("odd", "even") -%>">
         <td><%= link_to user.name, user_path(user) %></td>
         <td><%= user.email %></td>
         <td><%= time_ago_in_words user.created_at %> ago</td>
