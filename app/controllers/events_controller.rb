@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
   set_tab :events
   
   def new
@@ -16,9 +16,16 @@ class EventsController < ApplicationController
     else
       @event_series = EventSeries.new(params[:event])
     end
+        
     respond_to do |format|
+      if @event
+        @event.save
+      elsif @event_series
+        @event_series.save
+      end
       format.js
     end
+
   end
   
   def index

@@ -3,9 +3,8 @@
     <tr>
       <th>Name</th>
       <th>Email</td>
-      <th>Event</th>
-      <th>Start</th>
-      <th>Signups</th>
+      <th>Shift</th>
+      <th>Shift Start</th>
       <th>Signed Up</th> 
     </tr>
   </thead>
@@ -15,7 +14,6 @@
       <td><%= signup.user.email %></td>
       <td><%= signup.event.title %></td>
       <td><%= signup.event.starttime.to_s :short %></td>
-      <td><%= signup.event.spots_filled %></td>
       <td><%= time_ago_in_words signup.created_at %> ago</td>
   </tr>
 <% end %>
