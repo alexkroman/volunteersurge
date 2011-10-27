@@ -2,7 +2,8 @@ class ShiftsController < ApplicationController
   set_tab :shifts
 
   def index
-    @shifts = current_subdomain.events.upcoming.paginate(:page => params[:page])
+    @shifts = ShiftReport.new(params[:shift_report])
+    @assets = @shifts.assets.paginate(:page => params[:page])
   end
 
 end

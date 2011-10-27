@@ -1,3 +1,3 @@
 <h2>All Shifts</h2>
-<%= render 'table' %>
-<%= will_paginate @shifts %>
+<%= datagrid_table(@shifts, @assets) %>
+<%= will_paginate @assets %>

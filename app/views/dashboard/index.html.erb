@@ -1,8 +1,9 @@
 <h2>Upcoming Shifts</h2>
-<%= render 'shifts/table' %>
+<%= datagrid_table(@shifts, @assets.first, :order => false) %>
 
 <h2>Recent Shift Signups</h2>
-<%= render 'signups/table' %>
+<%= #render 'signups/table'
+ %>
 
 <h2>New Volunteers</h2>
 <%= render 'users/table' %>
