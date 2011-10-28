@@ -11,11 +11,9 @@ gem 'jquery-rails'
 gem "ice_cube", "~> 0.6.13"
 gem 'cancan'
 gem 'multitenant'
-gem 'formtastic'
 gem 'datagrid'
 gem 'rufus-scheduler'
-gem 'ruport'
-gem 'acts_as_reportable'
 gem 'will_paginate'
 gem 'simple-navigation'
+gem 'default_value_for'
 gem 'heroku', :group => :development

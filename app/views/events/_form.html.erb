@@ -1,42 +1,36 @@
-<%= form_for @event, :url => {:action => :create}, :before => "$('#creating_events').show();", :complete => "$('#creating_events').hide();", :remote => true do |f| %>
-<p>
+<%= form_for @event, :url => {:action => :create}, :remote => true do |f| %>
+<fieldset>
   <%=f.label :title %>
-  <br/>
-  <%=f.text_field :title %>
-</p>
-<p>
+  <div class="input">
+    <%=f.text_field :title %>
+  </div>
   <%=f.label :description %>
-  <br/>
+  <div class="input">
   <%=f.text_area :description, :rows => 4, :cols => 30 %>
-</p>
-<p>
+  </div>
   <%=f.label :starttime, 'Start Time' %>
-  <br/>
-  <%=f.datetime_select :starttime, :default => 1.hour.from_now, :minute_step => 15 %>
-</p>
-<p>
+  <div class="inline-inputs">
+  <%=f.datetime_select :starttime, :default => 1.hour.from_now, :minute_step => 15, :ampm => true, :class => 'small' %>
+  </div>
   <%=f.label :endtime, 'End Time' %>
-  <br/>
-  <%=f.datetime_select :endtime, :default => 2.hour.from_now, :minute_step => 15 %>
-</p>
-<p>
+  <div class="inline-inputs">
+  <%=f.datetime_select :endtime, :default => 2.hour.from_now, :minute_step => 15, :ampm => true, :html_options => {:class => 'small'} %>
+  </div>
   <%=f.label :all_day %>
+  <div class="inline-inputs">
   <%=f.check_box :all_day %>
-</p>
-<p>
+  </div>
   <%=f.label :capacity %>
-  <%=f.text_field :capacity %>
-</p>
-<p>
+  <div class="inline-inputs">
+  <%=f.text_field :capacity, :class => 'mini' %>
+  </div>
   <%=f.label :period, "Repeats" %>
   <%=f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);" %>
-</p>
-<p id = "frequency" style = "display:none;">
+<div id = "frequency" style = "display:none;">
   <%=f.label :frequency, "Repeat every" %>
   <%=f.select :frequency, (1..30).to_a %> <span id = "period"></span>
-</p>
+</div>
 <%=f.hidden_field :id, :value => @event.id %>
-<p>
   <%=f.submit 'Create' %> <span id = "creating_events" style = "display:none;">Creating, Please wait...</span>
-</p>
+</fieldset>
 <%end %>

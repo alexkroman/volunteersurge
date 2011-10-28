@@ -22,6 +22,10 @@ class Event < ActiveRecord::Base
   belongs_to_multitenant :subdomain
   has_many :signups
   
+  default_value_for :all_day, false
+  default_value_for :capacity, 5
+  
+  
   REPEATS = [
               "Does not repeat",
               "Daily"          ,

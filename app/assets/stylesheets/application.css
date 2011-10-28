@@ -11,6 +11,15 @@
 	border: none;
 }
 
-#calendar table th + th, table td + td, table tr + tr td {
+.fc-header table th + th, .fc-header table td + td {
 	border: none;
 }
+
+.fc-header tr:last-child td:last-child {
+	border: none;
+}
+
+.fc-header-center {
+	border: none;
+}
+
