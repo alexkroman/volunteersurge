@@ -52,7 +52,7 @@ class EventsController < ApplicationController
   
   def signup_all
     @event = Event.find(params[:id])
-    @event.event_series.events.each do |event|
+    @event.event_series.events.where(["events.starttime >= ?", @event.starttime]).each do |event|
       Signup.create!(:user => current_user, :event => event, :event_series => event.event_series )
     end
     redirect_to events_path
@@ -103,8 +103,10 @@ class EventsController < ApplicationController
     if params[:delete_all] == 'future'
       @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
       @event.event_series.events.delete(@events)
-    else
+    elsif params[:delete_all] == 'true'
       @event.event_series.destroy
+    else
+      @event.destroy
     end
     
     respond_to do |format|
