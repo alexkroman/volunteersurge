@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  set_tab :volunteers
   
   def show
     @user = User.find(params[:id])

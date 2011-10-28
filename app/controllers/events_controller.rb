@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   authorize_resource
-  set_tab :events
   
   def new
     @event = Event.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")

@@ -17,5 +17,5 @@ gem 'rufus-scheduler'
 gem 'ruport'
 gem 'acts_as_reportable'
 gem 'will_paginate'
-gem "tabs_on_rails"
+gem 'simple-navigation'
 gem 'heroku', :group => :development

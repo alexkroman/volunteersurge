@@ -25,7 +25,7 @@ list-style: none;
 border: none;
 }
 
-ul#MainTabs .current, ul#MainTabs .current {
+ul#MainTabs li.current, ul#MainTabs li.current {
 float: left;
 font-size: 12px;
 line-height: 12px;

@@ -1,6 +1,5 @@
 class DashboardController < ApplicationController
   #load_and_authorize_resource
-  set_tab :dashboard
 
   def index
     @shifts = ShiftReport.new(:short => true)
