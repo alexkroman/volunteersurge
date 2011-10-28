@@ -5,8 +5,9 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.paginate(:page => params[:page])
-  end
+     @volunteers = VolunteerReport.new(params[:volunteer_report])
+     @assets = @volunteers.assets.paginate(:page => params[:page])
+   end
   
   def valid
     token_user = User.valid?(params)

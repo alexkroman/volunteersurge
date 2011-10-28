@@ -20,11 +20,13 @@ $('#signup_event').html("<a href ='/events/" + <%= @event.id %> + "/signup' clas
 
 $('#desc_dialog').dialog({
     title: "<%= @event.title %>",
-    modal: true,
+	 draggable: false,
+	 resizable: false,
     width: 500,
     close: function(event, ui){
         $('#desc_dialog').dialog('destroy')
     }
 }); 
+
 
 $( ".button" ).button();

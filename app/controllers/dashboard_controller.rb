@@ -3,10 +3,8 @@ class DashboardController < ApplicationController
 
   def index
     @shifts = ShiftReport.new(:short => true)
-    @assets = @shifts.assets
-    
-    @signups = current_subdomain.signups.order('created_at desc').limit(6)
-    @users = current_subdomain.users.order('created_at desc').limit(6)
+    @volunteers = VolunteerReport.new(:short => true)
+    @signups = SignupReport.new(:short => true)
   end
 
 end

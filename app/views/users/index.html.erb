@@ -1,5 +1,5 @@
 <% content_for :title do %>
 Volunteers
 <% end %>
-<%= render 'table' %>
-<%= will_paginate @users %>
+<%= datagrid_table(@volunteers, @assets) %>
+<%= will_paginate @assets %>

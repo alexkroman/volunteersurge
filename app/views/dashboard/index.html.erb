@@ -3,12 +3,11 @@ Dashboard
 <% end %>
 
 <h2>Upcoming Shifts</h2>
-<%= datagrid_table(@shifts, @assets.first, :order => false) %>
+<%= datagrid_table(@shifts, :order => false) %>
 
 <h2>Recent Shift Signups</h2>
-<%= #render 'signups/table'
- %>
+<%= datagrid_table(@signups, :order => false) %>
 
 <h2>New Volunteers</h2>
-<%= render 'users/table' %>
+<%= datagrid_table(@volunteers, :order => false) %>
 
