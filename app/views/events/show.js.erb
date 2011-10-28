@@ -1,12 +1,17 @@
 $('#event_desc').html("<%= @event.description %>");
-$('#signup_event').html("<a href ='/events/" + <%= @event.id %> + "/signup' class='button'>Signup for this event</a>");
+
+<% unless can? :edit, Event %>
+	$('#signup_event').html("<a href ='/events/" + <%= @event.id %> + "/signup' class='button'>Signup for this event</a>");
+<% end %>
 
 <% if can? :edit, Event %>
   $('#edit_event').html("<a href = 'javascript:void(0);' class='button' onclick ='editEvent(" + <%= @event.id %> + ")'>Edit</a>");
 <% end %>
 
 <% if @event.event_series %>
+	<% unless can? :edit, Event %>
 	$('#signup_recurring_event').html("<a href ='/events/" + <%= @event.id %> + "/signup_all' class='button'>Signup for all occurrences of this event</a>");
+	<% end %>
 	<% if can? :edit, Event %>
 	$('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", " + false + ")'>Delete Only This Occurrence</a>");
 	$('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", " + true + ")'>Delete All In Series</a>")

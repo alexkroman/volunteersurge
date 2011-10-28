@@ -117,9 +117,8 @@ class EventsController < ApplicationController
       @event.destroy
     end
     
-    render :update do |page|
-      page<<"$('#calendar').fullCalendar( 'refetchEvents' )"
-      page<<"$('#desc_dialog').dialog('destroy')" 
+    respond_to do |format|
+      format.js
     end
     
     authorize! :destroy, @event

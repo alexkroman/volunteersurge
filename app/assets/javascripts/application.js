@@ -20,23 +20,6 @@ $(document).ready(function(){
 	$( ".button" ).button();
 });
 
-function moveEvent(event, dayDelta, minuteDelta, allDay){
-    jQuery.ajax({
-        data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&minute_delta=' + minuteDelta + '&all_day=' + allDay,
-        dataType: 'script',
-        type: 'post',
-        url: "/events/" + event.id + "/move"
-    });
-}
-
-function resizeEvent(event, dayDelta, minuteDelta){
-    jQuery.ajax({
-        data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&minute_delta=' + minuteDelta,
-        dataType: 'script',
-        type: 'post',
-        url: "/events/" + event.id + "/resize"
-    });
-}
 
 function editEvent(event_id){
     jQuery.ajax({
@@ -48,10 +31,14 @@ function editEvent(event_id){
 
 function deleteEvent(event_id, delete_all){
     jQuery.ajax({
-        data: 'id=' + event_id + '&delete_all='+delete_all,
+        data: '_method=delete&delete_all=' + delete_all,
         dataType: 'script',
         type: 'post',
-        url: "/events/destroy"
+        url: "/events/" + event_id,
+		  success: function() {
+    			$('#calendar').fullCalendar( 'refetchEvents');
+				$('#desc_dialog').dialog('destroy');
+  		  }
     });
 }
 
