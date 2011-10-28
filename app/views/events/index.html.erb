@@ -20,24 +20,36 @@ Calendar
           },
           defaultView: 'month',
           height: 500,
-          slotMinutes: 60,
           loading: function(bool){
               if (bool) 
                   $('#loading').show();
               else 
                   $('#loading').hide();
           },
+          
           events: "/events/retrieve",
           timeFormat: 'h:mm t{ - h:mm t} ',
-          dragOpacity: "0.5",
         
           
           eventClick: function(event, jsEvent, view){
+    
+              
               jQuery.ajax({
                   type: 'get',
-                  url: "/events/" + event.id
-              });             
+                  url: "/events/" + event.id,
+                  success: function() {
+                    $(".ui-dialog").position({
+                      my: "top",
+                      at: "top",
+                      of: jsEvent,
+                      offset: "30"
+                    }).fadeIn(); 
+                  }
+              });
               
+              
+               
+            
              
                
               

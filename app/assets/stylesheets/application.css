@@ -1,0 +1,16 @@
+.fc-header-title {
+	text-align: center;
+}
+
+#calendar table {
+	border: none;
+	margin: 0;
+}
+
+#calendar table th {
+	border: none;
+}
+
+#calendar table th + th, table td + td, table tr + tr td {
+	border: none;
+}
