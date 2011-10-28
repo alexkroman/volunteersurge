@@ -1,52 +1,130 @@
-<!DOCTYPE HTML>
-<head>
-  <title></title>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <%= stylesheet_link_tag    "reset" %>
-  <%= stylesheet_link_tag    "960_24_col" %>
-  <%= javascript_include_tag "application" %>  
-  <%= stylesheet_link_tag "application", 'fullcalendar' %>
-  <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" %>
-  <%= csrf_meta_tags %>
- </head>
-<body>
-  <div class="header">
-    <div class="container_24">
-        <div class="grid_4 prefix_2 alpha">
-          <div class="logo"><a href="/"><% if current_subdomain %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    
+    <%= javascript_include_tag "application" %>  
+    <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" %>
+    <%= stylesheet_link_tag 'bootstrap.min.css' %>
+    <%= stylesheet_link_tag 'fullcalendar' %>
+    
+    <%= stylesheet_link_tag "application" %>
+    
+    <%= csrf_meta_tags %>
+    
+    <style type="text/css">
+      /* Override some defaults */
+      html, body {
+        background-color: #eee;
+      }
+      body {
+        padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+      }
+      .container > footer p {
+        text-align: center; /* center align it with the container */
+      }
+      .container {
+        width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+      }
+
+      /* The white background content wrapper */
+      .content {
+        background-color: #fff;
+        padding: 20px;
+        margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+
+      /* Page header tweaks */
+      .page-header {
+        background-color: #f5f5f5;
+        padding: 20px 20px 10px;
+        margin: -20px -20px 20px;
+      }
+
+      /* Styles you shouldn't keep as they are for displaying this base example only */
+      .content .span10,
+      .content .span4 {
+        min-height: 500px;
+      }
+      /* Give a quick and non-cross-browser friendly divider */
+      .content .span4 {
+        margin-left: 0;
+        padding-left: 19px;
+        border-left: 1px solid #eee;
+      }
+
+      .topbar .btn {
+        border: 0;
+      }
+
+    </style>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="#"><% if current_subdomain %>
              <%= current_subdomain.organization %>
            <% else %>
              VolunteerSurge
-           <% end %></a></div>
+           <% end %></a>
+          <%= render_navigation(:level => 1) %>
+          </ul>
+          <div class="pull-right">
+            <% if user_signed_in? %>
+            <ul>
+              <li><%=link_to 'My Shifts', users_path, :class => 'small' %></li>
+              <li><%= link_to('My Account', edit_user_registration_path, :class => 'small account') %></li>
+              <li><%= link_to('Sign Out', destroy_user_session_path, :class => 'small account') %></li>        
+            <% end %>
+            </ul>
+          </div>
         </div>
-        <div class="grid_16 suffix_2 omega right">
-          <% if user_signed_in? %>
-          <%= current_user.email %> |
-          <%=link_to 'My Shifts', users_path, :class => 'small' %> |   
-          <%= link_to('My Account', edit_user_registration_path, :class => 'small account') %> |
-          <%= link_to('Sign Out', destroy_user_session_path, :class => 'small account') %>        
-          <% end %>
-        </div>
-        <div class="links grid_20 prefix_2 suffix_2 alpha">
-            <div id="Tabs"><%= render_navigation(:level => 1) %></div>
-        </div>
-    </div>
-  </div>
-  <div class="container_24">
-    <div class="grid_20 prefix_2 suffix_2 alpha">
-      <div class="content">
-        <p style="color: red"><%= alert %></p>
-        <%= yield %>
       </div>
     </div>
-  </div>
-  <div id="footer" class="clearfix">
-    <div class="container_24">
-      Powered by VolunteerSurge
-    </div>
-  </div>
-  <div id = "create_event_dialog" style ="display:none;">
-    <div id = "create_event"></div>
-  </div>
-</body>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+          <h1><%= yield :title %></h1>
+        </div>
+        <div class="row">
+          <div class="span14">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>Powered by VolunteerSurge</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
 </html>

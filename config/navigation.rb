@@ -1,5 +1,5 @@
 SimpleNavigation::Configuration.run do |navigation|  
-  navigation.selected_class = 'current'
+  navigation.selected_class = 'active'
   navigation.autogenerate_item_ids = false
   
   

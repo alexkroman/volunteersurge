@@ -1,3 +1,5 @@
-<h2>All Shifts</h2>
+<% content_for :title do %>
+Shifts
+<% end %>
 <%= datagrid_table(@shifts, @assets) %>
 <%= will_paginate @assets %>

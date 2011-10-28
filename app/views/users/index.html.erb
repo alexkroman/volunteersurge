@@ -1,3 +1,5 @@
-<h2>All Volunteers</h2>
+<% content_for :title do %>
+Volunteers
+<% end %>
 <%= render 'table' %>
 <%= will_paginate @users %>
