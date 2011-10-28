@@ -16,4 +16,5 @@ gem 'rufus-scheduler'
 gem 'will_paginate'
 gem 'simple-navigation'
 gem 'default_value_for'
+gem 'chronic'
 gem 'heroku', :group => :development

@@ -1,4 +1,4 @@
-<%= form_for @event, :url => {:action => :create}, :remote => true do |f| %>
+<%= form_for @event_series, :url => {:action => :create}, :remote => true do |f| %>
 <fieldset>
   <%=f.label :title %>
   <div class="input">
@@ -8,29 +8,45 @@
   <div class="input">
   <%=f.text_area :description, :rows => 4, :cols => 30 %>
   </div>
-  <%=f.label :starttime, 'Start Time' %>
-  <div class="inline-inputs">
-  <%=f.datetime_select :starttime, :default => 1.hour.from_now, :minute_step => 15, :ampm => true, :class => 'small' %>
-  </div>
-  <%=f.label :endtime, 'End Time' %>
-  <div class="inline-inputs">
-  <%=f.datetime_select :endtime, :default => 2.hour.from_now, :minute_step => 15, :ampm => true, :html_options => {:class => 'small'} %>
-  </div>
-  <%=f.label :all_day %>
-  <div class="inline-inputs">
-  <%=f.check_box :all_day %>
-  </div>
   <%=f.label :capacity %>
-  <div class="inline-inputs">
-  <%=f.text_field :capacity, :class => 'mini' %>
+  
+  <div class="input">
+  <%= f.text_field :capacity, :class => 'mini' %>
+  </div>
+  
+  <%=f.label :starttime, 'Date Range' %>
+    <div class="input">
+    <div class="inline-inputs">
+      <%= f.text_field :start_time_date, :class => 'small' %>
+      <%= f.text_field :start_time_time, :class => 'small' %>
+      to: 
+      <%= f.text_field :end_time_date, :class => 'small' %>
+      <%= f.text_field :end_time_time, :class => 'small' %>
+    </div>
+  
+  </div>
+  
+  <%=f.label :all_day %>
+  <div class="input">
+    <ul class="inputs-list">
+      <li><%=f.check_box :all_day %></li>
+    </ul>
   </div>
   <%=f.label :period, "Repeats" %>
+  <div class="input">
   <%=f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);" %>
+  </div>
+  
 <div id = "frequency" style = "display:none;">
   <%=f.label :frequency, "Repeat every" %>
-  <%=f.select :frequency, (1..30).to_a %> <span id = "period"></span>
+  <div class="input">
+    <%=f.select :frequency, (1..30).to_a, :class => 'small' %> <span id = "period"></span>
+  </div>
 </div>
-<%=f.hidden_field :id, :value => @event.id %>
-  <%=f.submit 'Create' %> <span id = "creating_events" style = "display:none;">Creating, Please wait...</span>
+</div>
+<%=f.hidden_field :id, :value => @event_series.id %>
+<p>
+  <%=f.submit 'Create Event', :class => 'button' %>
+</p>
 </fieldset>
 <%end %>

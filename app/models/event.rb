@@ -15,7 +15,7 @@
 #
 
 class Event < ActiveRecord::Base
-  attr_accessor :period, :frequency, :commit_button
+  attr_accessor :period, :frequency, :commit_button, :start_time_date, :start_time_time, :end_time_date, :end_time_time
   validates_presence_of :title, :description
   belongs_to :event_series
   belongs_to :subdomain
@@ -24,7 +24,11 @@ class Event < ActiveRecord::Base
   
   default_value_for :all_day, false
   default_value_for :capacity, 5
-  
+  default_value_for :start_time_date, Date.today
+  default_value_for :start_time_time, "9:00 AM"
+  default_value_for :end_time_date, Date.today
+  default_value_for :end_time_time, "10:00 AM"
+
   
   REPEATS = [
               "Does not repeat",
@@ -33,6 +37,12 @@ class Event < ActiveRecord::Base
               "Monthly"        ,
               "Yearly"         
   ]
+  
+  def repeat?
+    return false if event_series.period == 'Does not repeat'
+    return true
+  end
+ 
   
   def self.upcoming
     where(["starttime > ?", Time.now]).order('starttime asc')
@@ -43,7 +53,7 @@ class Event < ActiveRecord::Base
   end
   
   def spots_left
-    capacity - signups.size if capacity
+    capacity - signups_count if capacity
   end
   
   def spots_filled

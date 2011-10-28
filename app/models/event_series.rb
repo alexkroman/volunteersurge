@@ -1,5 +1,6 @@
 class EventSeries < ActiveRecord::Base
   attr_accessor :title, :description, :commit_button, :capacity
+  attr_accessor :start_time_date, :start_time_time, :end_time_date, :end_time_time
   
   validates_presence_of :frequency, :period, :starttime, :endtime
   validates_presence_of :title, :description
@@ -9,7 +10,14 @@ class EventSeries < ActiveRecord::Base
   belongs_to_multitenant :subdomain
   after_create :create_events_until
   
-  def create_events_until
+  before_validation :format_date
+
+   def format_date
+     self.starttime = Chronic.parse("#{start_time_date} #{start_time_time}") 
+     self.endtime = Chronic.parse("#{end_time_date} #{end_time_time}")
+   end
+  
+  def create_events_until     
     duration = endtime - starttime
     schedule = IceCube::Schedule.new(starttime)
     if period == 'Daily'
@@ -20,6 +28,8 @@ class EventSeries < ActiveRecord::Base
       schedule.rrule IceCube::Rule.monthly(frequency)
     elsif period == 'Yearly'
       schedule.rrule IceCube::Rule.yearly(frequency)
+    else
+      schedule.add_recurrence_date(starttime)
     end
     schedule.occurrences_between(starttime, Time.local(2015,1,1)).each do |o|
      events.create(:subdomain_id => self.subdomain_id, :capacity => capacity, :title => title, :description => description, :all_day => all_day, :starttime => o, :endtime => o + duration)

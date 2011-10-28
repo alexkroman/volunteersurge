@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   authorize_resource
   
   def new
-    @event = Event.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")
+    @event_series = Event.new
     respond_to do |format|
       format.js
     end
@@ -10,18 +10,9 @@ class EventsController < ApplicationController
   end
   
   def create
-    if params[:event][:period] == "Does not repeat"
-      @event = Event.new(params[:event])
-    else
-      @event_series = EventSeries.new(params[:event])
-    end
+    @event_series = EventSeries.new(params[:event]).save!
         
     respond_to do |format|
-      if @event
-        @event.save
-      elsif @event_series
-        @event_series.save
-      end
       format.js
     end
 
@@ -29,7 +20,6 @@ class EventsController < ApplicationController
   
   def index
     @event = Event.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")
-    
     @signups = current_user.signups.limit(10) if user_signed_in?
   end
   
@@ -42,10 +32,12 @@ class EventsController < ApplicationController
   end
   
   def retrieve
-    @events = Event.find(:all, :conditions => ["starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' and endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"] )
+    
+    @events = Event.find(:all, :include => :event_series, :conditions => ["starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' and endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"] )
+    
     events = [] 
     @events.each do |event|
-      events << {:id => event.id, :title => event.title_with_capacity, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id)? true: false}
+      events << {:id => event.id, :title => event.title_with_capacity, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.repeat?)? false : true}
     end
     respond_to do |format|
       format.json {render :json => events.to_json}
@@ -107,14 +99,12 @@ class EventsController < ApplicationController
   end  
   
   def destroy
-    @event = Event.find_by_id(params[:id])
-    if params[:delete_all] == 'true'
-      @event.event_series.destroy
-    elsif params[:delete_all] == 'future'
+    @event = Event.find(params[:id])
+    if params[:delete_all] == 'future'
       @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
       @event.event_series.events.delete(@events)
     else
-      @event.destroy
+      @event.event_series.destroy
     end
     
     respond_to do |format|

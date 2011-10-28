@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111021213500) do
+ActiveRecord::Schema.define(:version => 20111028213029) do
 
   create_table "event_series", :force => true do |t|
     t.integer  "frequency",    :default => 1
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20111021213500) do
     t.datetime "updated_at"
     t.text     "description"
     t.integer  "event_series_id"
+    t.integer  "signups_count",   :default => 0
   end
 
   add_index "events", ["event_series_id"], :name => "index_events_on_event_series_id"

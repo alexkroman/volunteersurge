@@ -5,7 +5,6 @@
 //= require_tree
 //= require jquery-ui
 //= require jquery.ui.datepicker
-//= require jquery.timePicker.min
 //= require fullcalendar
 //= require bootstrap-modal
 //= require bootstrap-alerts
@@ -15,6 +14,8 @@
 //= require bootstrap-scrollspy
 //= require bootstrap-tabs
 //= require gcal
+//= require jquery.timePicker
+
 
 $(document).ready(function(){ 
 	$( ".button" ).button();
