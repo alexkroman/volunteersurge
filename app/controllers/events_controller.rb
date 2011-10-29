@@ -77,9 +77,9 @@ class EventsController < ApplicationController
   end
   
   def update
-    @event = Event.find_by_id(params[:event][:id])
+    @event = Event.find(params[:id])
     if params[:event][:commit_button] == "Update All Occurrence"
-      @events = @event.event_series.events #.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
+      @events = @event.event_series.events
       @event.update_events(@events, params[:event])
     elsif params[:event][:commit_button] == "Update All Following Occurrence"
       @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
@@ -89,10 +89,10 @@ class EventsController < ApplicationController
       @event.save
     end
 
-    render :update do |page|
-      page<<"$('#calendar').fullCalendar( 'refetchEvents' )"
-      page<<"$('#desc_dialog').dialog('destroy')" 
+    respond_to do |format|
+      format.js
     end
+    
     authorize! :update, @event
   
   end  

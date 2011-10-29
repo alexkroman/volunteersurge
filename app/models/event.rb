@@ -43,6 +43,18 @@ class Event < ActiveRecord::Base
     return true
   end
  
+  def update_events(events, event)
+    events.each do |e|
+        st, et = e.starttime, e.endtime
+        e.attributes = event
+        e.starttime, e.endtime = st, ed
+        e.save
+    end
+    
+    event_series.attributes = event
+    event_series.save
+  end
+ 
   
   def self.upcoming
     where(["starttime > ?", Time.now]).order('starttime asc')

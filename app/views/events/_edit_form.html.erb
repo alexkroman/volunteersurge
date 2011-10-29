@@ -1,4 +1,4 @@
-<%= form_for @event, :url => {:action => :update} :remote => true do |f| %>
+<%= form_for @event, :url => {:action => :update}, :remote => true do |f| %>
 <p>
   <%=f.label :title %>
   <br/>
@@ -28,18 +28,6 @@
   <%=f.text_field :capacity %>
 </p>
 
-<%if false%>
-<%period = (@event.event_series)?@event.event_series.period : nil -%>
-<p>
-  <%=f.label :period, "Repeats" %>
-  <%=f.select :period, Event::REPEATS,{:selected => period}, :onchange => "showPeriodAndFrequency(this.value);" %>
-</p>
-<%frequency = (@event.event_series)?@event.event_series.frequency : nil -%>
-<p id = "frequency" style = "display:<%(period)? '' : 'none'%>;">
-  <%=f.label :frequency, "Repeat every" %>
-  <%=f.select :frequency, (1..30).to_a, {:selected => frequency} %> <span id = "period"></span>
-</p>
-<%end%>
 <%=f.hidden_field :id, :value => @event.id%>
 <%=f.hidden_field :commit_button, :value => ""%>
 <p>
@@ -50,7 +38,19 @@
   <%else-%>
   <%=f.submit 'Update', :onclick => "document.getElementById('event_commit_button').value = this.value"%>
   <%end-%>
-  
-  <span id = "updating_events" style = "display:none;">Updating, Please wait...</span>
 </p>
+<script>
+<% if @event.repeat? %>
+	<% if can? :edit, Event %>
+	$('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", " + false + ")'>Delete Only This Occurrence</a>");
+	$('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", " + true + ")'>Delete All In Series</a>")
+	$('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", \"future\")'>Delete All Future Events</a>")
+	<% end %>
+<% else %>
+	<% if can? :delete, Event %>
+	  $('#delete_event').html("<a href = 'javascript:void(0);' class='button' onclick ='deleteEvent(" + <%= @event.id %> + ", " + false + ")'>Delete</a>");
+	<% end %>	
+<% end %>
+</script>
+
 <%end %>
