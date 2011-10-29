@@ -1,5 +1,5 @@
 <% content_for :title do %>
-Calendar
+Volunteer Calendar
 <% end %>
 
 
@@ -7,13 +7,14 @@ Calendar
   <%= render 'new_form' %>
 </div>
 
-<div id="edit-modal-from-dom" class="modal hide fade">
-</div>
+<div id="edit-modal-from-dom" class="modal hide fade"></div>
 
-          <button data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true" class="btn primary">Add Event</button>
-
+<% if can? :edit, Event %>
+<button data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true" class="btn primary">Add Event</button>
 <br />
 <br />
+<% end %>
+
 <script>
 
 function attach_events() {

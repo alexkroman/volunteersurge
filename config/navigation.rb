@@ -8,9 +8,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :volunteers, 'Volunteers', volunteer_reports_path, :if => Proc.new { can? :create, Event }
     primary.item :shifts, 'Shifts', shift_reports_path, :if => Proc.new { can? :create, Event }
     primary.item :calendar, 'Calendar', events_path
-    primary.item :shifts, 'Settings', shifts_path, :if => Proc.new { can? :create, Event }
-    primary.item :shifts, 'My Shifts', signups_path, :unless => Proc.new { can? :create, Event }
-    
+    primary.item :shifts, 'Settings', shifts_path, :if => Proc.new { can? :create, Event }    
   end
   
 end

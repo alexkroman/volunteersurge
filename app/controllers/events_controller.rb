@@ -47,7 +47,9 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     Signup.create!(:event => @event, :event_series => @event.event_series, :user => current_user)
     flash[:message] = 'You have been signed up!'
-    redirect_to events_path
+    respond_to do |format|
+      format.js
+    end
   end
   
   def signup_all
@@ -55,20 +57,24 @@ class EventsController < ApplicationController
     @event.event_series.events.where(["events.starttime >= ?", @event.starttime]).each do |event|
       Signup.create!(:user => current_user, :event => event, :event_series => event.event_series )
     end
-    redirect_to events_path
+    respond_to do |format|
+      format.js
+    end
   end
   
   def cancel_signup
-    current_user.signups.find(params[:id]).destroy
-    flash[:message] = 'Your shift has been cancelled'    
-    redirect_to signups_path
+    current_user.signups.where(:event_id => params[:id]).destroy_all
+    respond_to do |format|
+      format.js
+    end  
   end
   
   def cancel_all_signups
     series_id = current_user.signups.find(params[:id]).event_series.id
     current_user.signups.where(:event_series_id => series_id).destroy_all
-    flash[:message] = 'Your shifts have been cancelled'  
-    redirect_to signups_path
+    respond_to do |format|
+      format.js
+    end 
   end
  
   def edit

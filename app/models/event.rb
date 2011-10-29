@@ -55,8 +55,7 @@ class Event < ActiveRecord::Base
     event_series.attributes = event
     event_series.save
   end
- 
-  
+    
   def self.upcoming
     where(["starttime > ?", Time.now]).order('starttime asc')
   end
