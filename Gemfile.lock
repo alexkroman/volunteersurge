@@ -44,6 +44,7 @@ GEM
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
     erubis (2.7.0)
+    fastercsv (1.5.4)
     friendly_id (3.3.0.1)
       babosa (~> 0.3.0)
     heroku (2.9.0)
@@ -131,6 +132,7 @@ DEPENDENCIES
   datagrid
   default_value_for
   devise
+  fastercsv
   friendly_id
   heroku
   ice_cube (~> 0.6.13)

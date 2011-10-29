@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_subdomain, :check_my_subdomain
   before_filter :current_subdomain, :find_tennant
 
-  WillPaginate.per_page = 40
-
   def not_found
     raise ActionController::RoutingError.new('Not Found')
   end

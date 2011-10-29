@@ -1,19 +1,19 @@
 <% content_for :title do %>
-Volunteers
+Shifts
 <% end %>
-<%= form_for @volunteers, {:method => :get} do |f| -%>
+<%= form_for @shifts, {:method => :get} do |f| -%>
   
   View: 
   <select>
-    <option>All Volunteers</option>
+    <option>All Shifts</option>
   </select>
   
   <div class="pull-right">
-  Find volunteers: 
+  Find shifts: 
   <%= f.text_field :name %>
   <%= f.submit 'Go' %>
   </div>
   
 <% end -%>
-<%= datagrid_table(@volunteers, @assets, :html => {:class => 'zebra-striped'}) %>
+<%= datagrid_table(@shifts, @assets, :html => {:class => 'zebra-striped'}) %>
 <%= will_paginate @assets %>

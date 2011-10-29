@@ -3,17 +3,37 @@ Dashboard
 <% end %>
 
 <h2>Upcoming Shifts</h2>
-<%= datagrid_table(@shifts, :order => false) %>
-
-<h2>Recent Shift Signups</h2>
-<table>
-  <% @signups.each do |signup| %>
+<table class="zebra-striped">
+  <% @shifts.each do |shift| %>
   <tr>
-    <td><%= signup.user.name %> signed up for the <%= signup.event.starttime.strftime('%m/%d') %> <%= signup.event.title %> <%= time_ago_in_words signup.created_at %> ago</td>
+    <td><%= link_to shift.title, shift %> starts in <%= distance_of_time_in_words_to_now shift.starttime %> and has <%= shift.signups_count %> people attending</td>
   </tr>
   <% end %>
 </table>
 
-<h2>New Users</h2>
-<%= datagrid_table(@volunteers, :order => false) %>
+<div class="row">
 
+  <div class="span7">
+  <h2>Recent Shift Signups</h2>
+  <table class="zebra-striped">
+    <% @signups.each do |signup| %>
+    <tr>
+      <td><%= link_to signup.user.name, signup.user %> signed up for <%= link_to signup.event.title, @signup %> on <%= signup.event.starttime.strftime('%m/%d') %> <%= time_ago_in_words signup.created_at %> ago</td>
+    </tr>
+    <% end %>
+  </table>
+  </div>
+
+  <div class="span7">
+
+  <h2>New Volunteers</h2>
+   <table class="zebra-striped">
+     <% @users.each do |user| %>
+     <tr>
+       <td><%= link_to user.name, user %> joined the site <%= time_ago_in_words user.created_at %> ago</td>
+     </tr>
+     <% end %>
+   </table>
+  </div>
+
+</div>

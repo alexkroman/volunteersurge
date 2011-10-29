@@ -16,7 +16,9 @@ class VolunteerReport
   
   column(:name)
   column(:email)
-  column(:created_at)
+  column(:created_at, :header => 'Joined on') do |user|
+    user.created_at.strftime('%m/%d/%y')
+  end
 
 
 end
