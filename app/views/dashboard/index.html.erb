@@ -6,8 +6,14 @@ Dashboard
 <%= datagrid_table(@shifts, :order => false) %>
 
 <h2>Recent Shift Signups</h2>
-<%= datagrid_table(@signups, :order => false) %>
+<table>
+  <% @signups.each do |signup| %>
+  <tr>
+    <td><%= signup.user.name %> signed up for the <%= signup.event.starttime.strftime('%m/%d') %> <%= signup.event.title %> <%= time_ago_in_words signup.created_at %> ago</td>
+  </tr>
+  <% end %>
+</table>
 
-<h2>New Volunteers</h2>
+<h2>New Users</h2>
 <%= datagrid_table(@volunteers, :order => false) %>
 

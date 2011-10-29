@@ -10,6 +10,10 @@ class VolunteerReport
     self.limit(6)
   end
 
+  filter(:name, :string) do |value|
+    self.where(["name like ? or email like ?", "%#{value}%", "%#{value}%"])
+  end
+  
   column(:name)
   column(:email)
   column(:created_at)

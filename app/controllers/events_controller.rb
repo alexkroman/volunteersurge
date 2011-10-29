@@ -20,7 +20,6 @@ class EventsController < ApplicationController
   
   def index
     @event = Event.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")
-    @signups = current_user.signups.limit(10) if user_signed_in?
   end
   
   def show

@@ -99,11 +99,7 @@
               <li class="dropdown" data-dropdown="dropdown" >
                 <a href="#" class="dropdown-toggle"><%= current_user.name %></a>
                 <ul class="dropdown-menu">
-                  <% unless can? :edit, Event %>
-                    <li><%=link_to 'My Shifts', users_path %></li>
-                  <% end %>
                   <li><%= link_to 'My Account', edit_user_registration_path %></li>
-    
                   <li class="divider"></li>
                   <li><%= link_to 'Sign Out', destroy_user_session_path %></li>        
                 </ul>

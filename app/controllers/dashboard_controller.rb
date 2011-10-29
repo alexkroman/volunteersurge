@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   def index
     @shifts = ShiftReport.new(:short => true)
     @volunteers = VolunteerReport.new(:short => true)
-    @signups = SignupReport.new(:short => true)
+    @signups = current_subdomain.signups.limit(6)
   end
 
 end

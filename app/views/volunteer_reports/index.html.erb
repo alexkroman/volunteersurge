@@ -1,0 +1,22 @@
+<% content_for :title do %>
+Volunteers
+<% end %>
+<%= form_for @volunteers, {:method => :get} do |f| -%>
+  
+  View: 
+  <select>
+    <option>All Volunteers</option>
+  </select>
+  
+  <div class="pull-right">
+  Find volunteers: 
+  <%= f.text_field :name %>
+  <%= f.submit 'Go' %>
+  </div>
+
+
+
+
+<% end -%>
+<%= datagrid_table(@volunteers, @assets) %>
+<%= will_paginate @assets %>

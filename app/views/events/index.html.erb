@@ -62,23 +62,6 @@ Calendar
 
 </script>
 
-<% if @signups and @signups.size > 0 %>
-  <h2>Your upcoming shifts</h2>
-  <% @signups.each do |signup| %>
-    <p><%= signup.event.title %> at <%= signup.event.starttime %>
-       <%= link_to 'Cancel this shift', cancel_signup_event_path(signup) %>
-       <%= link_to 'Cancel all shifts', cancel_all_signups_event_path(signup) %>
-    </p>
-  <% end %>
-  
-  <br />
-  <br />
-  <br />
-
-<% end %>
-
-
-
 <div>
   <div id='calendar'>
   </div>
