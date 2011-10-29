@@ -36,7 +36,7 @@ class EventsController < ApplicationController
     
     events = [] 
     @events.each do |event|
-      events << {:id => event.id, :title => event.title_with_capacity, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.repeat?)? false : true}
+      events << {:className => (event.users.include?(current_user)) ? 'attending' : 'not-attending', :id => event.id, :title => event.title_with_capacity, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.repeat?)? false : true}
     end
     respond_to do |format|
       format.json {render :json => events.to_json}

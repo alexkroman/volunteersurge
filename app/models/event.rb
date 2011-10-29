@@ -21,6 +21,7 @@ class Event < ActiveRecord::Base
   belongs_to :subdomain
   belongs_to_multitenant :subdomain
   has_many :signups
+  has_many :users, :through => :signups
   
   default_value_for :all_day, false
   default_value_for :capacity, 5

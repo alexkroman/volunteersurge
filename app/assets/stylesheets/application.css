@@ -2,6 +2,15 @@ div.time-picker {
 	z-index:999999;
 }
 
+#calendar .attending a {
+	background-color: #DDF4FB;
+	color: #000;
+}
+
+.fc-event {
+	border-color: none;
+}
+
 .modal form {
 	margin-bottom: 0px;
 }
