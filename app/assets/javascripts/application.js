@@ -15,7 +15,7 @@
 //= require bootstrap-tabs
 //= require gcal
 //= require jquery.timePicker
-
+//= require jquery.qtip
 
 $(document).ready(function(){ 
 	$( ".button" ).button();

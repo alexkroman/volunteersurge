@@ -1,1 +1,27 @@
-<%= @event.title %>
+<div class="tooltip-header">
+  <a class="close" href="#" onclick="$(this).parents('.qtip').qtip('hide');return false;">×</a>  
+  <h3><%= @event.title %></h3>
+</div>
+
+<div class="tooltip-body">
+  <%= @event.description %>
+</div>
+<div class="tooltip-footer">
+<% unless can? :edit, Event %>
+  <%= link_to 'Signup', signup_event_path, :class => 'btn primary' %>
+<% end %>
+
+<% if can? :edit, Event %>
+	<a href="#" id="<%= @event.id %>" class="btn primary edit-event">Edit</a>
+	<a href="#" id="<%= @event.id %>" class="btn danger delete-event">Cancel Event</a>
+<% end %>
+
+<% if @event.repeat? %>
+	<% unless can? :edit, Event %>
+	  <%= link_to 'Signup Recurring', signup_all_event_path, :class => 'btn primary' %>
+	<% end %>	
+<% end %>
+
+</div>
+
+<script>attach_events();</script>

@@ -1,51 +1,18 @@
 <%= form_for @event_series, :url => {:action => :create}, :remote => true do |f| %>
-<fieldset>
-  <%=f.label :title %>
-  <div class="input">
-    <%=f.text_field :title %>
-  </div>
-  <%=f.label :description %>
-  <div class="input">
-  <%=f.text_area :description, :rows => 4, :cols => 30 %>
-  </div>
-  <%=f.label :capacity %>
-  
-  <div class="input">
-  <%= f.text_field :capacity, :class => 'mini' %>
-  </div>
-  
-  <%=f.label :starttime, 'Date Range' %>
-    <div class="input">
-    <div class="inline-inputs">
-      <%= f.text_field :start_time_date, :class => 'small' %>
-      <%= f.text_field :start_time_time, :class => 'small' %>
-      to: 
-      <%= f.text_field :end_time_date, :class => 'small' %>
-      <%= f.text_field :end_time_time, :class => 'small' %>
-    </div>
-  
-  </div>
-  
-  <%=f.label :all_day %>
-  <div class="input">
-    <ul class="inputs-list">
-      <li><%=f.check_box :all_day %></li>
-    </ul>
-  </div>
-  <%=f.label :period, "Repeats" %>
-  <div class="input">
-  <%=f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);" %>
-  </div>
-  
-<div id = "frequency" style = "display:none;">
-  <%=f.label :frequency, "Repeat every" %>
-  <div class="input">
-    <%=f.select :frequency, (1..30).to_a, :class => 'small' %> <span id = "period"></span>
-  </div>
+
+<div class="modal-header">
+  <a href="#" class="close">&times;</a>
+  <h3>Create a new event</h3>
 </div>
+<div class="modal-body">
+  <%= render :partial => "form", :locals => { :f => f } %>
 </div>
-<%=f.hidden_field :id, :value => @event_series.id %>
-</fieldset><p>
-  <%=f.submit 'Create Event', :class => 'button' %>
-</p>
+
+<div class="modal-footer">
+  <%=f.submit 'Create Event', :class => 'btn primary' %>
+  <a href="#" class="btn secondary">Cancel</a>
+</div>
+  
 <%end %>
+
+

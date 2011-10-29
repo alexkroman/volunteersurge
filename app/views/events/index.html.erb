@@ -2,18 +2,69 @@
 Calendar
 <% end %>
 
-<p>
-  <% if can? :create, Event %>  
-    <%= link_to 'Create Event', new_event_path, :remote => true, :class => 'button' %>
-  <% end %>
-</p>
 
+<div id="modal-from-dom" class="modal hide fade">
+  <%= render 'new_form' %>
+</div>
+
+<div id="edit-modal-from-dom" class="modal hide fade">
+</div>
+
+          <button data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true" class="btn primary">Add Event</button>
+
+<br />
+<br />
 <script>
+
+function attach_events() {
+  $('.edit-event').click(function() {
+    $('.ui-tooltip').hide();
+    
+    
+    
+    jQuery.ajax({
+                      type: 'get',
+                      url: "/events/" + this.id + "/edit",
+                      success: function() {
+                        $('#edit-modal-from-dom').modal({
+                           show : true,
+                           keyboard : true,
+                           backdrop : true
+                        });
+                        
+                        
+                      }
+                  });
+    
+    
+    
+     return false;
+  });
+  
+  $('.delete-event').click(function() {
+    $('.ui-tooltip').hide();
+    
+    $('#edit-modal-from-dom').load("/events/" + this.id + "/delete_confirmation", function() {
+        $('#edit-modal-from-dom').modal({
+           show : true,
+           keyboard : true,
+           backdrop : true
+        });
+    });
+   
+    
+    
+    
+     return false;
+  });
+}
+
   $(document).ready(function(){ 
+
+      
            
       $('#calendar').fullCalendar({
           editable: false,
-          theme: true,
           header: {
               left: 'prev,next today',
               center: 'title',
@@ -31,29 +82,42 @@ Calendar
           events: "/events/retrieve",
           timeFormat: 'h:mm t{ - h:mm t} ',
         
+          eventRender: function(event, element) {
+                  element.qtip({
+                    position: {
+                       my: 'bottom-center',
+                       at: 'top-center',
+                    },
+                      show: {
+                            event: 'click',
+                            solo: true,
+                            modal: true,
+                      },
+        
+                       hide: {
+                          event: 'click',
+                          target: $('.close')
+                        },
+                      style: {
+                         classes: 'ui-tooltip-shadow ui-tooltip-light'
+                      },
+                      my: 'bottom center',
+                      at: 'top center',
+                      content: {
+                            text: 'Loading...', // The text to use whilst the AJAX request is loading
+                            ajax: {
+                               url:  "/events/" + event.id, // URL to the local file
+                               type: 'GET', // POST or GET
+                               
+                            }
+                         },
+                         
+                  });
+              },
           
-          eventClick: function(event, jsEvent, view){
-              
-              jQuery.ajax({
-                  type: 'get',
-                  url: "/events/" + event.id,
-                  success: function() {
-                    $(".ui-dialog").position({
-                      my: "top",
-                      at: "top",
-                      of: jsEvent,
-                      offset: "30"
-                    }); 
-                  }
-              });
-              
-              
-               
-            
-             
-               
-              
-          },
+
+
+
 
       });
   });

@@ -16,12 +16,11 @@ My Shifts
       <td><%= signup.event.starttime %></td>
       <td><%= signup.event.signups_count %></td>
       <td>
-        <%= link_to 'Cancel this shift', cancel_signup_event_path(signup), :class => 'button' %>
-        <%= link_to 'Cancel all shifts', cancel_all_signups_event_path(signup) %>
+        <%= link_to 'Cancel this shift', cancel_signup_event_path(signup), :class => 'btn primary' %>
+        <%= link_to 'Cancel all shifts', cancel_all_signups_event_path(signup), :class => 'btn primary' %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @signups %>
 <% end %>

@@ -4,4 +4,6 @@ class Signup < ActiveRecord::Base
   belongs_to :user
   belongs_to :subdomain
   belongs_to_multitenant :subdomain
+  
+  validates_presence_of :subdomain, :user, :event
 end

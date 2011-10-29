@@ -19,14 +19,14 @@ class EventsController < ApplicationController
   end
   
   def index
+    @event_series = Event.new
     @event = Event.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")
   end
   
   def show
     @event = Event.find(params[:id])
     respond_to do |format|
-      format.js
-      format.html
+      format.html { render :layout => !request.xhr? }
     end
   end
   
@@ -46,6 +46,7 @@ class EventsController < ApplicationController
   def signup
     @event = Event.find(params[:id])
     Signup.create!(:event => @event, :event_series => @event.event_series, :user => current_user)
+    flash[:message] = 'You have been signed up!'
     redirect_to events_path
   end
   
@@ -59,13 +60,15 @@ class EventsController < ApplicationController
   
   def cancel_signup
     current_user.signups.find(params[:id]).destroy
-    redirect_to events_path
+    flash[:message] = 'Your shift has been cancelled'    
+    redirect_to signups_path
   end
   
   def cancel_all_signups
     series_id = current_user.signups.find(params[:id]).event_series.id
     current_user.signups.where(:event_series_id => series_id).destroy_all
-    redirect_to events_path
+    flash[:message] = 'Your shifts have been cancelled'  
+    redirect_to signups_path
   end
  
   def edit
@@ -76,12 +79,20 @@ class EventsController < ApplicationController
     authorize! :edit, @event
   end
   
+  def delete_confirmation
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      format.html { render :layout => !request.xhr? }
+    end
+    authorize! :edit, @event
+  end
+  
   def update
     @event = Event.find(params[:id])
-    if params[:event][:commit_button] == "Update All Occurrence"
+    if params[:event][:commit_button] == "Update All"
       @events = @event.event_series.events
       @event.update_events(@events, params[:event])
-    elsif params[:event][:commit_button] == "Update All Following Occurrence"
+    elsif params[:event][:commit_button] == "Update Following"
       @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
       @event.update_events(@events, params[:event])
     else
@@ -99,10 +110,10 @@ class EventsController < ApplicationController
   
   def destroy
     @event = Event.find(params[:id])
-    if params[:delete_all] == 'future'
+    if params[:delete_all] == 'following'
       @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
       @event.event_series.events.delete(@events)
-    elsif params[:delete_all] == 'true'
+    elsif params[:delete_all] == 'all'
       @event.event_series.destroy
     else
       @event.destroy

@@ -1,3 +1,11 @@
+div.time-picker {
+	z-index:999999;
+}
+
+.modal form {
+	margin-bottom: 0px;
+}
+
 .fc-header-title {
 	text-align: center;
 }
@@ -21,4 +29,49 @@
 
 .fc-header-center {
 	border: none;
+}
+
+.fc-button-month, .fc-button-agendaWeek, .fc-button-agendaDay, .fc-button-today {
+	text-align: center;
+}
+
+.fc-button-prev {
+	text-align :right;
+}
+
+
+.ui-tooltip-content {
+	font-size: 14px;
+	padding: 0px;
+	width: 300px;
+}
+
+.tooltip-footer:after {
+    clear: both;
+}
+.tooltip-footer:before, .tooltip-footer:after {
+    content: "";
+    display: table;
+}
+.tooltip-footer:before, .tooltip-footer:after {
+    content: "";
+    display: table;
+}
+
+.tooltip-footer {
+    background-color: #F5F5F5;
+    border-radius: 0 0 6px 6px;
+    border-top: 1px solid #DDDDDD;
+    box-shadow: 0 1px 0 #FFFFFF inset;
+    margin-bottom: 0;
+    padding: 14px 15px 15px;
+}
+
+.tooltip-header {
+    border-bottom: 1px solid #EEEEEE;
+    padding: 5px 15px;
+}
+
+.tooltip-body {
+    padding: 15px;
 }

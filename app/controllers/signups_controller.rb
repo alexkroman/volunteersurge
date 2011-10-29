@@ -1,7 +1,7 @@
 class SignupsController < ApplicationController
   
   def index
-    @signups = current_user.signups.paginate(params[:page]) if user_signed_in?
+    @signups = current_user.signups
   end
   
 end
