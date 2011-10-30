@@ -29,7 +29,6 @@ GEM
       activesupport (= 3.1.1)
     activesupport (3.1.1)
       multi_json (~> 1.0)
-    acts_as_indexed (0.7.6)
     addressable (2.2.6)
     annotate (2.4.0)
     arel (2.2.1)
@@ -38,8 +37,6 @@ GEM
     builder (3.0.0)
     cancan (1.6.5)
     chronic (0.6.4)
-    datagrid (0.3.6)
-      rails
     default_value_for (1.0.6)
     devise (1.4.8)
       bcrypt-ruby (~> 3.0)
@@ -131,11 +128,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts_as_indexed
   annotate
   cancan
   chronic
-  datagrid
   default_value_for
   devise
   fastercsv
