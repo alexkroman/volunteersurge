@@ -1,31 +1,53 @@
-<h2>Sign up</h2>
+<%= content_for :title do %>
+Sign Up
+<% end %>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-stacked'}) do |f| %>
   <%= devise_error_messages! %>
 
   <% if current_subdomain %>
     <%= f.hidden_field :subdomain_name, :value => current_subdomain.name %>
     <%= f.hidden_field :organization_name, :value => current_subdomain.organization %>
   <% else%>
+  
+  
     <p><%= f.label :subdomain %>
     <br /><%= f.text_field :subdomain_name %></p>
     <p><%= f.label :organization %>
     <br /><%= f.text_field :organization_name %></p>
   <% end %>
 
-  <p><%= f.label :name %><br />
-  <%= f.text_field :name %></p>
+  <div class="clearfix">
+    <%= f.label :name %>
+    <div class="input">
+      <%= f.text_field :name %>
+    </div>
+  </div>
 
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
+  <div class="clearfix">
+    <%= f.label :email %>
+    <div class="input">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+  
+  <div class="clearfix">
+    <%= f.label :password %>
+    <div class="input">
+      <%= f.password_field :password %>
+    </div>
+  </div>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+  <div class="clearfix">
+    <%= f.label :password_confirmation %>
+    <div class="input">
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
 
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.submit "Sign up" %></p>
+<div class="actions">
+  <%= f.submit "Sign up", :class => 'btn primary' %>
+</div>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

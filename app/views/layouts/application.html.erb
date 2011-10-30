@@ -15,6 +15,10 @@
     
     <%= javascript_include_tag "application" %>  
     <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css" %>
+    <%= stylesheet_link_tag 'bootstrap.min' %>
+    <%= stylesheet_link_tag 'fullcalendar' %>  
+    <%= stylesheet_link_tag 'timePicker.css' %>  
+    <%= stylesheet_link_tag 'jquery.qtip.css' %>  
     <%= stylesheet_link_tag "application" %>
     <%= csrf_meta_tags %>
     
@@ -123,7 +127,7 @@
         <div class="row">
           <div class="span14">
             <%- flash.each do |name, msg| -%>
-              <%= content_tag :div, msg, :class => 'alert-message block-message success', :id => "flash_#{name}" if msg.is_a?(String) %>
+              <%= content_tag :div, msg, :class => 'alert-message block-message success', :id => "flash_#{name}" if msg.is_a?(String) and msg.length > 0 %>
             <%- end -%>
             <%= yield %>
           </div>

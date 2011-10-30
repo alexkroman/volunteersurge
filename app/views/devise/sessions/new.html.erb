@@ -2,7 +2,7 @@
 Sign In
 <% end %>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-stacked'}) do |f| %>
 
 <div class="clearfix">
   <%= f.label :email %>
@@ -12,7 +12,7 @@ Sign In
 </div>
 
 <div class="clearfix">
-  <p><%= f.label :password %>
+  <%= f.label :password %>
   <div class="input">
     <%= f.password_field :password %>
   </div>
