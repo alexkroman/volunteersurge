@@ -1,13 +1,14 @@
-<%= form_tag volunteers_path, {:method => 'get'} do %>
-View: 
-<select>
-  <option>All Volunteers</option>
-  <option>By Number of Signups</option>  
-</select>
+<% content_for :title do %>
+Volunteer
+<% end %>
 
-<div class="pull-right">
-Live search: 
-<%= text_field_tag :live_search %>
+<%= form_tag volunteers_path, {:method => 'get'} do %>
+<div class="row">
+  <div class="span2"></div>
+  <div class="pull-right">
+  Live search: 
+  <%= text_field_tag :live_search %>
+  </div>
 </div>
 <% end %>
 

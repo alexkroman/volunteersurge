@@ -1,11 +1,13 @@
 <% if @volunteers.size > 0 %>
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Signups</th>
-    <th>Created</th>
-  </tr>
+  <thead>
+    <tr>
+      <th class="blue header">Name</th>
+      <th class="blue header">Email</th>
+      <th class="blue header">Signups</th>
+      <th class="blue header">Created</th>
+    </tr>
+  </thead>
   <% @volunteers.each do |volunteer| %>
   <tr>
     <td><%=link_to volunteer.name, volunteer %></td>
