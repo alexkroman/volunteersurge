@@ -16,6 +16,6 @@ jQuery(function($) {
 		   function(data){
 		   	$("#volunteer-results").html(data);
 		 });
-    }, 500 );
+    }, 300 );
  });
 })

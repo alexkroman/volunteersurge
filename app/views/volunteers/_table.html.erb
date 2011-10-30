@@ -3,12 +3,14 @@
   <tr>
     <th>Name</th>
     <th>Email</th>
+    <th>Signups</th>
     <th>Created</th>
   </tr>
   <% @volunteers.each do |volunteer| %>
   <tr>
     <td><%=link_to volunteer.name, volunteer %></td>
     <td><%= volunteer.email %></td>
+    <td><%= volunteer.events.count %></td>
     <td><%= volunteer.created_at %></td>
   <tr>
 <% end %>
