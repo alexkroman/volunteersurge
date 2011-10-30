@@ -11,7 +11,6 @@ gem 'jquery-rails'
 gem "ice_cube", "~> 0.6.13"
 gem 'cancan'
 gem 'multitenant'
-gem 'datagrid'
 gem 'rufus-scheduler'
 gem 'will_paginate'
 gem 'simple-navigation'
@@ -19,4 +18,5 @@ gem 'default_value_for'
 gem 'chronic'
 gem 'fastercsv'
 gem 'annotate'
+gem 'scoped_search'
 gem 'heroku', :group => :development

@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
   after_create :update_subdomain_owner
   has_many :signups
   has_many :events, :through => :signups
-  
+  scoped_search :on => [:name, :email]
+    
   def self.valid?(params)
     token_user = self.where(:loginable_token => params[:id]).first
     if token_user

@@ -29,6 +29,7 @@ GEM
       activesupport (= 3.1.1)
     activesupport (3.1.1)
       multi_json (~> 1.0)
+    acts_as_indexed (0.7.6)
     addressable (2.2.6)
     annotate (2.4.0)
     arel (2.2.1)
@@ -104,6 +105,8 @@ GEM
     rubyzip (0.9.4)
     rufus-scheduler (2.0.11)
       tzinfo (>= 0.3.23)
+    scoped_search (2.3.5)
+      activerecord (>= 2.1.0)
     simple-navigation (3.5.0)
       activesupport (>= 2.3.2)
     sprockets (2.0.3)
@@ -128,6 +131,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_indexed
   annotate
   cancan
   chronic
@@ -142,6 +146,7 @@ DEPENDENCIES
   multitenant
   rails
   rufus-scheduler
+  scoped_search
   simple-navigation
   sqlite3-ruby
   will_paginate

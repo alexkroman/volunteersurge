@@ -1,0 +1,15 @@
+<%= form_tag volunteers_path, {:method => 'get'} do %>
+View: 
+<select>
+  <option>All Volunteers</option>
+</select>
+
+<div class="pull-right">
+Live search: 
+<%= text_field_tag :live_search %>
+</div>
+<% end %>
+
+<div id="volunteer-results">
+  <%= render 'table' %>
+</div>

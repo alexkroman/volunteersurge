@@ -1,0 +1,18 @@
+<% if @volunteers.size > 0 %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Created</th>
+  </tr>
+  <% @volunteers.each do |volunteer| %>
+  <tr>
+    <td><%=link_to volunteer.name, volunteer %></td>
+    <td><%= volunteer.email %></td>
+    <td><%= volunteer.created_at %></td>
+  <tr>
+<% end %>
+</table>
+<%= will_paginate @volunteers %>
+<% end %>
+
