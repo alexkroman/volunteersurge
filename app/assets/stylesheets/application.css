@@ -2,6 +2,14 @@ div.time-picker {
 	z-index:999999;
 }
 
+#event_start_time_date, #event_end_time_date {
+	width: 70px;
+}
+
+#event_start_time_time, #event_end_time_time {
+	width: 60px;
+}
+
 #calendar .attending a {
 	background-color: #DDF4FB;
 	color: #000;

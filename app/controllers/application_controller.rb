@@ -23,7 +23,11 @@ class ApplicationController < ActionController::Base
       sign_out(current_user)
       flash[:notice] = nil
       home_path = valid_user_url(token, :subdomain => current_user.subdomain_name)
-      return home_path 
+      if current_user.admin?
+        return dashboard_index_path
+      else
+        return home_path 
+      end
     else
       if current_user.subdomain != current_subdomain 
         sign_out(current_user)

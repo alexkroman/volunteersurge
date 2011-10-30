@@ -3,17 +3,16 @@ Volunteer Calendar
 <% end %>
 
 
-<div id="modal-from-dom" class="modal hide fade">
-  <%= render 'new_form' %>
-</div>
-
-<div id="edit-modal-from-dom" class="modal hide fade"></div>
-
 <% if can? :edit, Event %>
-<button data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true" class="btn primary">Add Event</button>
+<button id="new-event" class="btn primary">Add Event</button>
 <br />
 <br />
 <% end %>
+
+
+<div id="modal-from-dom" class="modal hide fade"></div>
+
+
 
 <script>
 
@@ -27,7 +26,7 @@ function attach_events() {
                       type: 'get',
                       url: "/events/" + this.id + "/edit",
                       success: function() {
-                        $('#edit-modal-from-dom').modal({
+                        $('#modal-from-dom').modal({
                            show : true,
                            keyboard : true,
                            backdrop : true
@@ -45,8 +44,8 @@ function attach_events() {
   $('.delete-event').click(function() {
     $('.ui-tooltip').hide();
     
-    $('#edit-modal-from-dom').load("/events/" + this.id + "/delete_confirmation", function() {
-        $('#edit-modal-from-dom').modal({
+    $('#modal-from-dom').load("/events/" + this.id + "/delete_confirmation", function() {
+        $('#modal-from-dom').modal({
            show : true,
            keyboard : true,
            backdrop : true
@@ -61,6 +60,18 @@ function attach_events() {
 }
 
   $(document).ready(function(){ 
+
+    $('#new-event').click(function() {
+       $('.ui-tooltip').hide();
+
+       $('#modal-from-dom').load("/events/new", function() {
+           $('#modal-from-dom').modal({
+              show : true,
+              keyboard : true,
+              backdrop : true
+           });
+       });
+});
 
       
            

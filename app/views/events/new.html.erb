@@ -10,7 +10,7 @@
 
 <div class="modal-footer">
   <%=f.submit 'Create Event', :class => 'btn primary' %>
-  <a href="#" class="btn secondary">Cancel</a>
+  <a href="#" class="cancel-button btn secondary" onclick="$('#modal-from-dom').modal('hide');">Cancel</a>
 </div>
   
 <%end %>

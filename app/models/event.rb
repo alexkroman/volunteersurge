@@ -25,12 +25,7 @@ class Event < ActiveRecord::Base
   
   default_value_for :all_day, false
   default_value_for :capacity, 5
-  default_value_for :start_time_date, Date.today
-  default_value_for :start_time_time, "9:00 AM"
-  default_value_for :end_time_date, Date.today
-  default_value_for :end_time_time, "10:00 AM"
 
-  
   REPEATS = [
               "Does not repeat",
               "Daily"          ,
@@ -38,6 +33,24 @@ class Event < ActiveRecord::Base
               "Monthly"        ,
               "Yearly"         
   ]
+
+  
+  def start_time_date
+    (starttime ? starttime : Date.today).strftime('%Y-%m-%d')
+  end
+  
+  def start_time_time
+    (starttime ? starttime : Time.now).strftime('%I:%M%p')
+  end
+  
+  def end_time_date
+    (endtime ? endtime : Date.today).strftime('%Y-%m-%d') 
+    
+  end
+  
+  def end_time_time
+    (endtime ? endtime : Time.now + 1.hour).strftime('%I:%M%p') 
+  end
   
   def repeat?
     return false if event_series.period == 'Does not repeat'

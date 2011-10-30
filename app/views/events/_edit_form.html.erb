@@ -16,10 +16,11 @@
 <%unless  @event.repeat? -%>
   <%=f.submit 'Update', :class => 'btn primary', :onclick => "$('event_commit_button').value = this.value" %>
 <%else-%>
-  <%=f.submit 'Update Only This', :class => 'btn primary', :onclick => "$('event_commit_button').value = this.value"%>
+  <%=f.submit 'Update This Event', :class => 'btn primary', :onclick => "$('event_commit_button').value = this.value"%>
   <%=f.submit 'Update All', :class => 'btn primary', :onclick => "$('event_commit_button').value = this.value"%>
-  <%=f.submit 'Update Following', :class => 'btn primary', :onclick => "$('event_commit_button').value = this.value" %>
+  <%=f.submit 'Update Following Events', :class => 'btn primary', :onclick => "$('event_commit_button').value = this.value" %>
 <%end-%>
+<a href="#" class="cancel-button btn secondary" onclick="$('#modal-from-dom').modal('hide');">Cancel</a>
 
 </div>
 

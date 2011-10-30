@@ -19,7 +19,6 @@ class EventsController < ApplicationController
   end
   
   def index
-    @event_series = Event.new
     @event = Event.new(:starttime => 1.hour.from_now, :endtime => 2.hours.from_now, :period => "Does not repeat")
   end
   
@@ -98,7 +97,7 @@ class EventsController < ApplicationController
     if params[:event][:commit_button] == "Update All"
       @events = @event.event_series.events
       @event.update_events(@events, params[:event])
-    elsif params[:event][:commit_button] == "Update Following"
+    elsif params[:event][:commit_button] == "Update Following Events"
       @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
       @event.update_events(@events, params[:event])
     else

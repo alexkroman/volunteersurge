@@ -30,7 +30,7 @@
   </ul>
 </div>
 
-<% if @event.new_record? %>
+<% if @event_series and @event_series.new_record? %>
 <%=f.label :period, "Repeats" %>
 <div class="input">
   <%=f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);" %>

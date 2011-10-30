@@ -2,38 +2,92 @@
 Dashboard
 <% end %>
 
-<h2>Upcoming Shifts</h2>
-<table class="zebra-striped">
-  <% @shifts.each do |shift| %>
-  <tr>
-    <td><%= link_to shift.title, shift %> starts in <%= distance_of_time_in_words_to_now shift.starttime %> and has <%= shift.signups_count %> people attending</td>
-  </tr>
-  <% end %>
-</table>
+<div class="row">
+  
+  <div class="span7">
 
 <div class="row">
-
-  <div class="span7">
-  <h2>Recent Shift Signups</h2>
+<div class="span7">
+  <h3>Upcoming Shifts</h3>
   <table class="zebra-striped">
-    <% @signups.each do |signup| %>
+    <% @shifts.each do |shift| %>
     <tr>
-      <td><%= link_to signup.user.name, signup.user %> signed up for <%= link_to signup.event.title, @signup %> on <%= signup.event.starttime.strftime('%m/%d') %> <%= time_ago_in_words signup.created_at %> ago</td>
+      <td>
+        <span class="label warning">Important</span>
+         <strong><%= link_to shift.title, shift %></strong> starts in <%= distance_of_time_in_words_to_now shift.starttime %>, <%= shift.signups_count %> attending
+        
+        </td>
     </tr>
     <% end %>
   </table>
-  </div>
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="span7">
+<h3>New Signups</h3>
+<table class="zebra-striped">
+  <% @signups.each do |signup| %>
+  <tr>
+    <td><span class="label success">New</span> <strong><%= link_to signup.user.name, signup.user %></strong> signed up for <strong><%= link_to signup.event.title, @signup %></strong> on <%= signup.event.starttime.strftime('%m/%d') %> <%= time_ago_in_words signup.created_at %> ago</td>
+  </tr>
+  <% end %>
+</table>
+</div>
+
+</div>
+
+<div class="row">
+
+
 
   <div class="span7">
 
-  <h2>New Volunteers</h2>
+  <h3>New Volunteers</h3>
    <table class="zebra-striped">
      <% @users.each do |user| %>
      <tr>
-       <td><%= link_to user.name, user %> joined the site <%= time_ago_in_words user.created_at %> ago</td>
+       <td><span class="label success">New</span> <strong><%= link_to user.name, user %></strong> joined the site <%= time_ago_in_words user.created_at %> ago</td>
      </tr>
      <% end %>
    </table>
   </div>
 
 </div>
+
+<div class="row">
+
+  <div class="span7">
+
+  <h3>New Events</h3>
+   <table class="zebra-striped">
+     <% @events.each do |event| %>
+     <tr>
+       <td><span class="label success">New</span> <strong><%= link_to event.title, event %></strong> was added <%= time_ago_in_words event.created_at %> ago</td>
+     </tr>
+     <% end %>
+   </table>
+  </div>
+
+
+</div>
+
+
+</div>
+
+<div class="span5 offset1">
+  <h3>Welcome to VolunteerSurge</h3>
+  
+  <p>
+    This will eventually be some sort of help text.
+    
+    
+    
+    
+  </p>
+  
+  </div>
+  
+  </div>
