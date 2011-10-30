@@ -1,0 +1,40 @@
+<div class="tooltip-header">
+  <a class="close" href="#" onclick="$(this).parents('.qtip').qtip('hide');return false;">×</a>  
+  <h3><%= @event.title %> at <%= @event.starttime.strftime('%I:%M%p') %></h3>
+</div>
+
+<div class="tooltip-body">
+  <%= @event.description %>
+  <br />
+  <br />
+  <ul>
+  <li>This shift is <%= distance_of_time_in_words(@event.starttime, @event.endtime) %></li>
+  <li>There are <%= @event.spots_left %> spots remaining</li>
+  </ul>
+</div>
+<div class="tooltip-footer">
+<% unless can? :edit, Event %>
+  <% unless @event.users.include?(current_user) %>
+  <%= link_to 'Signup', signup_event_path, :class => 'btn primary', :remote => true %>
+  <% if @event.repeat? %>
+  	  <%= link_to 'Signup Recurring', signup_all_event_path, :class => 'btn primary', :remote => true %>
+  <% end %>
+  <% else %>
+    <%= link_to 'Cancel this shift', cancel_signup_event_path(@event), :class => 'btn warning', :remote => true %>
+    <% if @event.repeat? %>
+      <%= link_to 'Cancel all shifts', cancel_all_signups_event_path(@event), :class => 'btn warning', :remote => true %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if can? :edit, Event %>
+  <%= link_to 'View Details', @event, :class => 'btn success' %>
+	<a href="#" id="<%= @event.id %>" class="btn primary edit-event">Edit</a>
+	<a href="#" id="<%= @event.id %>" class="btn danger delete-event">Cancel Event</a>
+<% end %>
+
+
+
+</div>
+
+<script>attach_events();</script>

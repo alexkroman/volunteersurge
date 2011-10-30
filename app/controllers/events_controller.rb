@@ -29,6 +29,13 @@ class EventsController < ApplicationController
     end
   end
   
+  def popup
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      format.html { render :layout => !request.xhr? }
+    end
+  end
+  
   def retrieve
     
     @events = Event.find(:all, :include => :event_series, :conditions => ["starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' and endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"] )

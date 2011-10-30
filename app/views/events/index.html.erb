@@ -118,7 +118,7 @@ function attach_events() {
                       content: {
                             text: 'Loading...', // The text to use whilst the AJAX request is loading
                             ajax: {
-                               url:  "/events/" + event.id, // URL to the local file
+                               url:  "/events/" + event.id + '/popup', // URL to the local file
                                type: 'GET', // POST or GET
                                
                             }
