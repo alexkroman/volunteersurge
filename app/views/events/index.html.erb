@@ -1,9 +1,9 @@
 <% content_for :title do %>
 Volunteer Calendar
 <% end %>
-
 <% if can? :edit, Event %>
 <button id="new-event" class="btn primary">Add Event</button>
 <% end %>
 <div id="modal-from-dom" class="modal hide fade"></div>
 <div id='calendar'></div>
+

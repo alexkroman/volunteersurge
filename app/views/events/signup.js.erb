@@ -1,1 +1,8 @@
+$('.ui-tooltip').hide();
 $('#calendar').fullCalendar( 'refetchEvents');
+$('#modal-from-dom').html('<%= escape_javascript(render(:partial => 'signup_confirmation')) %>');
+$('#modal-from-dom').modal({
+   show : true,
+   keyboard : true,
+   backdrop : true
+});

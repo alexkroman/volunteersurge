@@ -52,7 +52,6 @@ class EventsController < ApplicationController
   def signup
     @event = Event.find(params[:id])
     Signup.create!(:event => @event, :event_series => @event.event_series, :user => current_user)
-    flash[:message] = 'You have been signed up!'
     respond_to do |format|
       format.js
     end
@@ -69,15 +68,16 @@ class EventsController < ApplicationController
   end
   
   def cancel_signup
-    current_user.signups.where(:event_id => params[:id]).destroy_all
+    @event = Event.find(params[:id])
+    current_user.signups.where(:event_id => @event.id).destroy_all
     respond_to do |format|
       format.js
     end  
   end
   
   def cancel_all_signups
-    event = Event.find(params[:id])
-    current_user.signups.where(:event_series_id => event.event_series.id).destroy_all
+    @event = Event.find(params[:id])
+    current_user.signups.where(:event_series_id => @event.event_series.id).destroy_all
     respond_to do |format|
       format.js
     end 
