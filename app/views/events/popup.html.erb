@@ -10,6 +10,9 @@
   <ul>
   <li>This shift is <%= distance_of_time_in_words(@event.starttime, @event.endtime) %></li>
   <li>There are <%= @event.spots_left %> spots remaining</li>
+  <% if @event.repeat? %>
+  <li>This event repeats <b><%= @event.event_series.period %></b></li>
+  <% end %>
   </ul>
 </div>
 <div class="tooltip-footer">

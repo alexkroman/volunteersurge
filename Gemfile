@@ -18,4 +18,5 @@ gem 'simple-navigation'
 gem 'default_value_for'
 gem 'chronic'
 gem 'fastercsv'
+gem 'annotate'
 gem 'heroku', :group => :development

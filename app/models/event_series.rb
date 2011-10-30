@@ -37,3 +37,18 @@ class EventSeries < ActiveRecord::Base
   end
   
 end
+# == Schema Information
+#
+# Table name: event_series
+#
+#  id           :integer         not null, primary key
+#  frequency    :integer         default(1)
+#  period       :string(255)     default("monthly")
+#  starttime    :datetime
+#  endtime      :datetime
+#  all_day      :boolean         default(FALSE)
+#  subdomain_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+

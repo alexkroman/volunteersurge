@@ -1,19 +1,3 @@
-# == Schema Information
-# Schema version: 20100330111833
-#
-# Table name: events
-#
-#  id              :integer(4)      not null, primary key
-#  title           :string(255)
-#  starttime       :datetime
-#  endtime         :datetime
-#  all_day         :boolean(1)
-#  created_at      :datetime
-#  updated_at      :datetime
-#  description     :text
-#  event_series_id :integer(4)
-#
-
 class Event < ActiveRecord::Base
   attr_accessor :period, :frequency, :commit_button, :start_time_date, :start_time_time, :end_time_date, :end_time_time
   validates_presence_of :title, :description
@@ -92,3 +76,22 @@ class Event < ActiveRecord::Base
   end  
   
 end
+
+# == Schema Information
+#
+# Table name: events
+#
+#  id              :integer         not null, primary key
+#  title           :string(255)
+#  starttime       :datetime
+#  endtime         :datetime
+#  capacity        :integer
+#  all_day         :boolean         default(FALSE)
+#  subdomain_id    :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  description     :text
+#  event_series_id :integer
+#  signups_count   :integer         default(0)
+#
+

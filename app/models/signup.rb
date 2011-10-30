@@ -7,3 +7,17 @@ class Signup < ActiveRecord::Base
   
   validates_presence_of :subdomain, :user, :event
 end
+
+# == Schema Information
+#
+# Table name: signups
+#
+#  id              :integer         not null, primary key
+#  user_id         :integer
+#  event_id        :integer
+#  event_series_id :integer
+#  subdomain_id    :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+

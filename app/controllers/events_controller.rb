@@ -76,8 +76,8 @@ class EventsController < ApplicationController
   end
   
   def cancel_all_signups
-    series_id = current_user.signups.find(params[:id]).event_series.id
-    current_user.signups.where(:event_series_id => series_id).destroy_all
+    event = Event.find(params[:id])
+    current_user.signups.where(:event_series_id => event.event_series.id).destroy_all
     respond_to do |format|
       format.js
     end 

@@ -14,6 +14,7 @@ class Ability
     end  
     can :read, :all
     can :retrieve, :all
+    can :popup, :all
   end
   
 end
