@@ -19,5 +19,8 @@ gem 'chronic'
 gem 'fastercsv'
 gem 'annotate'
 gem 'scoped_search'
-gem 'tabletastic'
+gem "redcarpet"
+gem "albino"
+gem "nokogiri"
+gem 'rails_markitup'
 gem 'heroku', :group => :development

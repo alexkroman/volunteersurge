@@ -17,7 +17,11 @@ Rails3SubdomainDevise::Application.routes.draw do
   resources :dashboard
   resources :signups
   resources :shifts
-  resources :sites
+  resources :sites do
+    collection do
+      get :faq
+    end
+  end
   resources :shift_reports
   resources :volunteers do
     collection do

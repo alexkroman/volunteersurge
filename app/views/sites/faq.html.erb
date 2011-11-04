@@ -1,0 +1,4 @@
+<% content_for :title do %>
+FAQ
+<% end %>
+<%= RedCloth.new(current_subdomain.faq).to_html.html_safe %>

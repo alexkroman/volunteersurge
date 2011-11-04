@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111028213029) do
+ActiveRecord::Schema.define(:version => 20111104205419) do
 
   create_table "event_series", :force => true do |t|
     t.integer  "frequency",    :default => 1
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20111028213029) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "faq"
   end
 
   add_index "subdomains", ["name"], :name => "index_subdomains_on_name"

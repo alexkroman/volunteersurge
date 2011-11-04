@@ -1,0 +1,20 @@
+<% content_for :title do %>
+  Settings
+<% end %>
+<%= form_for @site, :html => {:method => :put, :class => 'form-stacked' } do |f| %>
+  <div class="clearfix">
+    <%= f.label 'Name of your site' %>
+    <div class="input">
+      <%= f.text_field :organization %>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label 'Create a FAQ page for your site' %>
+    <div class="input">
+      <%= f.cktext_area :faq, :toolbar => 'Basic' %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Save Changes', :class => 'btn primary' %>
+  </div>
+<% end %>

@@ -1,10 +1,11 @@
 <% content_for :title do %>
-My Shifts
+  My Shifts
 <% end %>
-
-<%= table_for(@shifts) do |t|
-  t.data do
-    t.cell(:title, :heading => 'Name')
-    t.cell(:starttime, :heading => 'Start Time')
-  end
-end %>
+<table class="zebra-striped">
+  <% @shifts.each do |shift| %>
+    <tr>
+      <td><h4><%= shift.title %></h4><%= shift.starttime.strftime('%B %e at %l:%M%p') %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @volunteers %>
