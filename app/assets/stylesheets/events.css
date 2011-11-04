@@ -7,10 +7,6 @@
 	margin-bottom: 20px;
 }
 
-div.time-picker {
-	z-index:999999;
-}
-
 #event_start_time_date, #event_end_time_date {
 	width: 70px;
 }

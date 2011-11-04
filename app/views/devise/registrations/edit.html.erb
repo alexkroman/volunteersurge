@@ -2,7 +2,7 @@
 Edit Account
 <% end %>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :class => 'form-stacked'}) do |f| %>
 <fieldset>
   <%= devise_error_messages! %>
 
@@ -14,35 +14,30 @@ Edit Account
       <%= f.text_field :name %>
     </div>
   </div>
-
   <div class="clearfix">
     <%= f.label :email %>
     <div class="input">
     <%= f.text_field :email %>
     </div>
   </div>
-
-  <div class="clearfix">
-    <%= f.label :password %>
-    <div class="input">
-    <%= f.password_field :password %>
-    <span class="help-inline">leave blank if you don't want to change it)</span>
-    
-    </div>
-  </div>
-
-  <div class="clearfix">
-    <%= f.label :password_confirmation %>
-    <div class="input">
-    <%= f.password_field :password_confirmation %>
-    </div>
-  </div>
-  
   <div class="clearfix">
     <%= f.label :current_password %> 
     <div class="input">
     <%= f.password_field :current_password %>
-    <span class="help-inline">we need your current password to confirm your changes</span>
+    <span class="help-block">We need your current password to confirm your changes</span>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label 'New Password' %>
+    <div class="input">
+    <%= f.password_field :password %>
+    <span class="help-block">Leave blank if you don't want to change it)</span>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label 'Verify New Password' %>
+    <div class="input">
+    <%= f.password_field :password_confirmation %>
     </div>
   </div>
 </fieldset>

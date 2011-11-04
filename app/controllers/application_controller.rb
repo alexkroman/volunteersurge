@@ -9,38 +9,42 @@ class ApplicationController < ActionController::Base
 
   def current_subdomain
     Subdomain.find_by_name!(request.subdomain) if request.subdomain.present?
-  end      
-  
+  end
+
   def find_tennant
     Multitenant.current_tenant = current_subdomain
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    if current_subdomain.nil? 
+    if current_subdomain.nil?
       token =  Devise.friendly_token
       current_user.loginable_token = token
       current_user.save
       sign_out(current_user)
       flash[:notice] = nil
-      home_path = valid_user_url(token, :subdomain => current_user.subdomain_name)
-      if current_user.admin?
-        return dashboard_index_path
-      else
-        return home_path 
-      end
+      return valid_user_url(token, :subdomain => current_user.subdomain.name)
     else
-      if current_user.subdomain != current_subdomain 
+      if current_user.subdomain != current_subdomain
         sign_out(current_user)
         flash[:notice] = nil
         flash[:alert] = "Sorry, invalid user or password for subdomain"
       end
     end
+    if current_user.admin?
+      return dashboard_index_path
+    else
+      return :root
+    end
     super
   end
-  
+
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied."
-    redirect_to root_url
+    flash[:error] = "Please login to the site"
+    if request.xhr?
+      render 'users/redirect'
+    else
+      redirect_to root_url
+    end
   end
-  
+
 end

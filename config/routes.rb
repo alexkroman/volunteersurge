@@ -1,4 +1,6 @@
 Rails3SubdomainDevise::Application.routes.draw do
+  get "shifts/index"
+
   devise_for :users
   
   resources :users, :only => [:index, :show]   do
@@ -15,6 +17,7 @@ Rails3SubdomainDevise::Application.routes.draw do
   resources :dashboard
   resources :signups
   resources :shifts
+  resources :sites
   resources :shift_reports
   resources :volunteers do
     collection do

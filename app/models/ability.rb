@@ -11,7 +11,7 @@ class Ability
       can :cancel_signup, :all
       can :cancel_all_signups, :all
       can :dashboard, :all
-    end  
+    end
     can :read, :all
     can :retrieve, :all
     can :popup, :all

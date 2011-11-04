@@ -10,11 +10,20 @@ Sign Up
     <%= f.hidden_field :organization_name, :value => current_subdomain.organization %>
   <% else%>
   
+  <div class="clearfix">
+    <%= f.label :subdomain %>
+    <div class="input">
+      <%= f.text_field :subdomain_name %>
+    </div>
+  </div>
   
-    <p><%= f.label :subdomain %>
-    <br /><%= f.text_field :subdomain_name %></p>
+  <div class="clearfix">
     <p><%= f.label :organization %>
-    <br /><%= f.text_field :organization_name %></p>
+    <div class="input">
+      <%= f.text_field :organization_name %>
+    </div>
+  </div>
+  
   <% end %>
 
   <div class="clearfix">
@@ -35,6 +44,7 @@ Sign Up
     <%= f.label :password %>
     <div class="input">
       <%= f.password_field :password %>
+      <div class="help-inline">6 characters or longer is safest</div>
     </div>
   </div>
 

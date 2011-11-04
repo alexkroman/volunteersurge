@@ -7,7 +7,7 @@ Volunteer
   <div class="span2"></div>
   <div class="pull-right">
   Live search: 
-  <%= text_field_tag :live_search %>
+  <%= text_field_tag :live_search, params[:live_search], :autocomplete => 'off' %>
   </div>
 </div>
 <% end %>

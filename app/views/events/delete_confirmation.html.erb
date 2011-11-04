@@ -6,13 +6,13 @@
 <div class="modal-body">
   <% if @event.repeat? %>
   	<% if can? :edit, Event %>
-  	<p><%= button_to 'Cancel only this instance', event_path(@event, :delete_all => 'one'), :class => 'btn danger', :method => :delete, :remote => true, :confirm => 'Are you sure you want to cancel this event?' %></p>
-  	<p><%= button_to 'Cancel all events in this series', event_path(@event, :delete_all => 'all'), :class => 'btn danger', :method => :delete, :remote => true, :confirm => 'Are you sure you want to cancel this event?' %></p>
-  	<p><%= button_to 'Cancel all following events', event_path(@event, :delete_all => 'following'), :class => 'btn danger', :method => :delete, :remote => true, :confirm => 'Are you sure you want to cancel this event?' %></p>
+  	<p><%= button_to 'Cancel only this instance', event_path(@event, :delete_all => 'one'), :class => 'btn danger', :method => :delete, :remote => true %></p>
+  	<p><%= button_to 'Cancel all events in this series', event_path(@event, :delete_all => 'all'), :class => 'btn danger', :method => :delete, :remote => true %></p>
+  	<p><%= button_to 'Cancel all following events', event_path(@event, :delete_all => 'following'), :class => 'btn danger', :method => :delete, :remote => true %></p>
   	<% end %>
   <% else %>
   	<% if can? :delete, Event %>
-  	  <p><%= button_to 'Cancel Event', event_path(@event, :delete_all => 'one'), :class => 'btn danger', :method => :delete, :remote => true, :confirm => 'Are you sure you want to cancel this event?' %></p>
+  	  <p><%= button_to 'Cancel Event', event_path(@event, :delete_all => 'one'), :class => 'btn danger', :method => :delete, :remote => true %></p>
   	<% end %>	
   <% end %>
 </div>

@@ -6,6 +6,13 @@ class Subdomain < ActiveRecord::Base
   has_many :signups
   validates_uniqueness_of :name, :case_sensitive => false
   validates_presence_of :name, :organization
+  
+  before_create :create_subdomain
+  
+  def create_subdomain
+    self.name = self.name.to_slug.normalize.to_s
+  end
+  
 end
 
 # == Schema Information

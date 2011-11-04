@@ -1,0 +1,10 @@
+<% content_for :title do %>
+My Shifts
+<% end %>
+
+<%= table_for(@shifts) do |t|
+  t.data do
+    t.cell(:title, :heading => 'Name')
+    t.cell(:starttime, :heading => 'Start Time')
+  end
+end %>

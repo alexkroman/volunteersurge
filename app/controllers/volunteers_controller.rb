@@ -1,7 +1,7 @@
 class VolunteersController < ApplicationController
   
   def index
-    @volunteers = User.paginate(:page => params[:page])
+    @volunteers = User.search_for(params[:live_search]).paginate(:page => params[:page])
     respond_to do |format|
       format.html
     end
