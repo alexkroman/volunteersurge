@@ -19,8 +19,8 @@ gem 'chronic'
 gem 'fastercsv'
 gem 'annotate'
 gem 'scoped_search'
-gem "redcarpet"
-gem "albino"
-gem "nokogiri"
-gem 'rails_markitup'
+gem "bluecloth"
+gem "friendly_id", "~> 4.0.0.beta14"
+gem 'twitter_bootstrap_form_for'
 gem 'heroku', :group => :development
+

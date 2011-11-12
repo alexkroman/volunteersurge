@@ -12,12 +12,29 @@ function attach_events() {
                       type: 'get',
                       url: "/events/" + this.id + "/edit",
                       success: function() {
+                        $('#errors').hide();
                         $('#modal-from-dom').modal({
                            show : true,
                            keyboard : true,
                            backdrop : true
                         });
                         
+                        $('.edit_event').bind('ajax:error', function(evt, xhr, status, error){
+                          var responseObject = $.parseJSON(xhr.responseText),
+                          errors = $('<ul />');
+
+                          $.each(responseObject, function(name, error){
+                            errors.append('<li>' + name + ' ' + error + '</li>');
+                          })
+
+                          $('#errors').html(errors).show();
+                          $('#modal-from-dom').effect("shake", { times:2 }, 100);
+                        })
+
+                        $('.edit_event').bind('ajax:success', function() {  
+                          $('#calendar').fullCalendar( 'refetchEvents');
+                          $('#modal-from-dom').modal('hide');
+                        });
                         
                       }
                   });
@@ -45,19 +62,42 @@ function attach_events() {
   });
 }
 
-  $(document).ready(function(){ 
+$(document).ready(function(){ 
 
-    $('#new-event').click(function() {
-       $('.ui-tooltip').hide();
+  $('#new-event').click(function() {
 
-       $('#modal-from-dom').load("/events/new", function() {
-           $('#modal-from-dom').modal({
-              show : true,
-              keyboard : true,
-              backdrop : true
-           });
-       });
-});
+    $('.ui-tooltip').hide();
+
+    $('#modal-from-dom').load("/events/new", function() {
+      $('#errors').hide();
+      $('#modal-from-dom').modal({
+        show : true,
+        keyboard : true,
+        backdrop : true
+      });
+
+      $('#new_event').bind('ajax:error', function(evt, xhr, status, error){
+        var responseObject = $.parseJSON(xhr.responseText),
+        errors = $('<ul />');
+
+        $.each(responseObject, function(name, error){
+          errors.append('<li>' + name + ' ' + error + '</li>');
+        })
+
+        $('#errors').html(errors).show();
+        $('#modal-from-dom').effect("shake", { times:2 }, 100);
+      })
+
+      $('#new_event').bind('ajax:success', function() {  
+        $('#calendar').fullCalendar( 'refetchEvents');
+        $('#modal-from-dom').modal('hide');
+      });
+
+
+    });
+
+
+  });
 
       
            

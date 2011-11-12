@@ -10,6 +10,9 @@ class SitesController < ApplicationController
   def faq
   end
   
+  def about
+  end
+  
   def update
     respond_to do |format|
       if current_subdomain.update_attributes(params[:site])

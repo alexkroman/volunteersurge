@@ -4,7 +4,7 @@
 <table class="zebra-striped">
   <% @shifts.each do |shift| %>
     <tr>
-      <td><h4><%= shift.title %></h4><%= shift.starttime.strftime('%B %e at %l:%M%p') %></td>
+      <td><h4><%=link_to shift.title, shift %></h4><%= shift.starttime.strftime('%B %e at %l:%M%p') %></td>
     </tr>
   <% end %>
 </table>

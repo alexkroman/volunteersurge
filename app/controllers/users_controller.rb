@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       flash[:alert] = "Login could not be validated"
     end
     if token_user.admin?
-      redirect_to dashboard_path
+      redirect_to dashboard_index_path
     else
       redirect_to :root
     end

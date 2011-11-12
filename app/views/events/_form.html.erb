@@ -1,83 +1,92 @@
-<%=f.label :title %>
-<div class="input">
-  <%=f.text_field :title %>
+<div id="errors" class="alert-message block-message error"></div>
+<div class="clearfix">
+  <%=f.label :title %>
+  <div class="input">
+    <%=f.text_field :title %>
+  </div>
 </div>
-<%=f.label :description %>
-<div class="input">
-<%=f.text_area :description, :rows => 4, :cols => 30 %>
+<div class="clearfix">
+  <%=f.label :description %>
+  <div class="input">
+    <%=f.text_area :description, :rows => 4, :cols => 30 %>
+  </div>
 </div>
-<%=f.label :capacity %>
+<div class="clearfix">
+  <%=f.label :capacity %>
 
-<div class="input">
-<%= f.text_field :capacity, :class => 'mini' %>
-</div>
-
-<%=f.label :starttime, 'From' %>
-<div class="input">
-  <div class="inline-inputs">
-  <%= f.text_field :start_time_date, :class => 'small' %>
-  <%= f.text_field :start_time_time, :class => 'small' %>
-  To:
-  <%= f.text_field :end_time_date, :class => 'small' %>
-  <%= f.text_field :end_time_time, :class => 'small' %>
+  <div class="input">
+    <%= f.text_field :capacity, :class => 'mini' %>
   </div>
 </div>
 
-<%=f.label :all_day %>
-<div class="input">
-  <ul class="inputs-list">
-    <li><%=f.check_box :all_day %></li>
-  </ul>
+<div class="clearfix">
+
+  <%=f.label :starttime, 'From' %>
+  <div class="input">
+    <div class="inline-inputs">
+      <%= f.text_field :start_time_date, :class => 'small' %>
+      <%= f.text_field :start_time_time, :class => 'small' %>
+      To:
+      <%= f.text_field :end_time_date, :class => 'small' %>
+      <%= f.text_field :end_time_time, :class => 'small' %>
+    </div>
+  </div>
+
 </div>
 
 <% if @event_series and @event_series.new_record? %>
-<%=f.label :period, "Repeats" %>
-<div class="input">
-  <%=f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);" %>
-</div>
+  <div class="clearfix">
+    <%=f.label :period, "Repeats" %>
+    <div class="input">
+      <%=f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);" %>
+    </div>
 
-<div id = "frequency" style = "display:none;">
-  <%=f.label :frequency, "Repeat every" %>
-  <div class="input">
-    <%=f.select :frequency, (1..30).to_a, :class => 'small' %> <span id = "period"></span>
   </div>
-</div>
+
+  <div class="clearfix">
+    <div id = "frequency" style = "display:none;">
+      <%=f.label :frequency, "Repeat every" %>
+      <div class="input">
+        <%=f.select :frequency, (1..30).to_a, :class => 'small' %> <span id = "period"></span>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <script>
-$('#event_start_time_date').datepicker(
-   {
-       dateFormat: 'yy-mm-dd',
-   });
+  $('#event_start_time_date').datepicker(
+  {
+    dateFormat: 'yy-mm-dd',
+  });
 
-$("#event_start_time_time").timePicker	({
-	  startTime: "09:00",
-	  show24Hours: false,
-	  step: 15});
+  $("#event_start_time_time").timePicker	({
+    startTime: "09:00",
+    show24Hours: false,
+    step: 15});
 
-$("#event_end_time_time").timePicker({
-	  	  startTime: "10:00",
-		  show24Hours: false,
-		  step: 15});
+  $("#event_end_time_time").timePicker({
+    startTime: "10:00",
+    show24Hours: false,
+    step: 15});
 
-$('#event_end_time_date').datepicker(
-	   {
-	       dateFormat: 'yy-mm-dd',
-	   });
+  $('#event_end_time_date').datepicker(
+  {
+    dateFormat: 'yy-mm-dd',
+  });
 
 
-// Store time used by duration.
-var oldTime = $.timePicker("#event_start_time_time").getTime();
+  // Store time used by duration.
+  var oldTime = $.timePicker("#event_start_time_time").getTime();
 
-// Keep the duration between the two inputs.
-$("#event_start_time_time").change(function() {
-  if ($("#event_end_time_time").val()) { // Only update when second input has a value.
-    // Calculate duration.
-    var duration = ($.timePicker("#event_end_time_time").getTime() - oldTime);
-    var time = $.timePicker("#event_start_time_time").getTime();
-    // Calculate and update the time in the second input.
-    $.timePicker("#event_end_time_time").setTime(new Date(new Date(time.getTime() + duration)));
-    oldTime = time;
-  }
-});
+  // Keep the duration between the two inputs.
+  $("#event_start_time_time").change(function() {
+    if ($("#event_end_time_time").val()) { // Only update when second input has a value.
+      // Calculate duration.
+      var duration = ($.timePicker("#event_end_time_time").getTime() - oldTime);
+      var time = $.timePicker("#event_start_time_time").getTime();
+      // Calculate and update the time in the second input.
+      $.timePicker("#event_end_time_time").setTime(new Date(new Date(time.getTime() + duration)));
+      oldTime = time;
+    }
+  });
 </script>

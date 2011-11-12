@@ -1,0 +1,4 @@
+<% content_for :title do %>
+About
+<% end %>
+<%= BlueCloth.new(current_subdomain.about).to_html.html_safe %>

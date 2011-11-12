@@ -11,7 +11,13 @@
   <div class="clearfix">
     <%= f.label 'Create a FAQ page for your site' %>
     <div class="input">
-      <%= f.cktext_area :faq, :toolbar => 'Basic' %>
+      <%= f.text_area :faq, :class => 'xxlarge' %>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label 'Create an about page for your site' %>
+    <div class="input">
+      <%= f.text_area :about, :class => 'xxlarge' %>
     </div>
   </div>
   <div class="actions">

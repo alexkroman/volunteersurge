@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111104205419) do
+ActiveRecord::Schema.define(:version => 20111105231024) do
 
   create_table "event_series", :force => true do |t|
     t.integer  "frequency",    :default => 1
@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(:version => 20111104205419) do
     t.text     "description"
     t.integer  "event_series_id"
     t.integer  "signups_count",   :default => 0
+    t.string   "slug"
   end
 
   add_index "events", ["event_series_id"], :name => "index_events_on_event_series_id"
+  add_index "events", ["slug"], :name => "index_events_on_slug", :unique => true
 
   create_table "signups", :force => true do |t|
     t.integer  "user_id"
@@ -46,19 +48,8 @@ ActiveRecord::Schema.define(:version => 20111104205419) do
     t.integer  "subdomain_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "number_attending"
   end
-
-  create_table "slugs", :force => true do |t|
-    t.string   "name"
-    t.integer  "sluggable_id"
-    t.integer  "sequence",                     :default => 1, :null => false
-    t.string   "sluggable_type", :limit => 40
-    t.string   "scope"
-    t.datetime "created_at"
-  end
-
-  add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
-  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
 
   create_table "subdomains", :force => true do |t|
     t.string   "name"
@@ -67,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20111104205419) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "faq"
+    t.text     "about"
   end
 
   add_index "subdomains", ["name"], :name => "index_subdomains_on_name"

@@ -1,13 +1,117 @@
 <% content_for :title do %>
-  <%= @event.title %> at <%= @event.starttime.strftime('%I:%M%p') %>
+  <%= @event.title %>
+  <small>
+    <%= @event.starttime.strftime('%1:%M %p on %B %e %Y') %>
+  </small>
 <% end %>
 
-<%= @event.description %>
-  
-<h3>Volunteer Sign Ups</h3>
 
-<ul>
-<% @event.users.each do |user| %>
-  <li><%= link_to user.name, user %></li>
+<div class="row">
+
+
+  <div class="span9">
+
+          <p><%= @event.description %></p>
+
+    <% if current_subdomain.about %>
+      <h3>Information </h3>
+    <%= BlueCloth.new(current_subdomain.about).to_html.html_safe %>
+    <% end %>
+
+
+
+
+
+      <% if can? :edit, Event %>
+
+        <h3>People Signed Up (Administrator Only)</h3>
+
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+          <% @event.users.each do |user| %>
+            <tr>
+              <td><%= link_to user.name, user %></td>
+              <td><%= user.email  %></td>
+            </tr>
+          <% end %>
+        </table>
+
+      <% end %>
+  </div>
+
+
+
+  <div class="span5">
+
+
+    <div class="well">
+      <% unless @signup.user == current_user %>
+      <h2>Sign up for this shift</h2>
+<% else %>
+      <h2>You are signed up</h2>
 <% end %>
-</ul>
+      <br /> 
+      <address>
+        <strong>Starts</strong>
+        <br />
+        <%= @event.starttime.strftime('%1:%M %p %B %e %Y') %>
+      </address>
+      <address>
+        <strong>Ends</strong>
+        <br />
+        <%= @event.endtime.strftime('%1:%M %p %B %e %Y') %>
+      </address>
+      <% unless @signup.user == current_user %>
+      <%= form_for @signup, {:html => {:class => 'form-stacked'}} do |f| %>
+        <div class="clearfix">
+          <%=  f.label 'How many people are coming?' %>
+          <div class="input">
+            <%= f.text_field :number_attending, :class => 'span1' %> 
+            <%= hidden_field_tag :event_id, @event.id %> 
+          </div>
+        </div>
+        <br />
+        <%= submit_tag 'Sign Up', :class => 'btn primary large' %>
+      <% end %>
+      <% else %>
+        <%= link_to 'Cancel your attendance', signup_path(@signup, :event_id => @event.id), :confirm => 'Are you sure?', :method => :delete, :class => 'btn danger large' %>
+      <% end %>
+    </div>
+
+    <div class="addthis_toolbox addthis_default_style ">
+      <a class="addthis_button_preferred_1"></a>
+      <a class="addthis_button_preferred_2"></a>
+      <a class="addthis_button_preferred_3"></a>
+      <a class="addthis_button_preferred_4"></a>
+      <a class="addthis_button_compact"></a>
+      <a class="addthis_counter addthis_bubble_style"></a>
+    </div>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e98716c30e422af"></script>
+    <br />
+
+<img width="280" height="218" src="http://mt0.google.com/vt/data=dBVT5y2Vcups9u9NPswGovtE0-pb4evAEHjs_pMmsXwrak05_83dlLUEJNpphHqcjPGNKLa-hBP0piJ_CF9XVIiWcoQw8rhdjxOIWXW6R6H0lM0X5bbDGJ50So861JhJ1gF2RDo4wbpGJF0zi3jeqluPKsOipYv6MXMcOH4kjb5u6ZI0XcO96JDya3S_FxxrmqVIF2sy3Vpqzgv7E9rcxhb4adjQBPV2">
+<br />
+<br />
+          <p>
+          <b>Business name</b> 
+          <br />
+          1512 NE 28th Ave
+          <br />
+          Portland, OR
+          <br />
+          555-555-5555
+          <br />
+          <a href="#">Directions</a>
+
+  </div>
+
+
+
+
+
+</div>
+
+

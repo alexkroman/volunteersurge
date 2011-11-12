@@ -7,6 +7,10 @@
 	margin-bottom: 20px;
 }
 
+.well .form-stacked {
+  padding-left: 0px;
+}
+
 #event_start_time_date, #event_end_time_date {
 	width: 70px;
 }

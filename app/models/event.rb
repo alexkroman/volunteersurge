@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, :use => :slugged
   attr_accessor :period, :frequency, :commit_button, :start_time_date, :start_time_time, :end_time_date, :end_time_time
   validates_presence_of :title, :description
   belongs_to :event_series
@@ -6,7 +8,6 @@ class Event < ActiveRecord::Base
   belongs_to_multitenant :subdomain
   has_many :signups
   has_many :users, :through => :signups
-  
   default_value_for :all_day, false
   default_value_for :capacity, 5
 

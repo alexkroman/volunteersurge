@@ -17,21 +17,10 @@
 </div>
 <div class="tooltip-footer">
   <% unless can? :edit, Event %>
-    <% unless @event.users.include?(current_user) %>
-      <%= link_to 'Sign up once', signup_event_path, :class => 'btn primary', :remote => true %>
-      <% if @event.repeat? %>
-        <%= link_to "Sign up for series ", signup_all_event_path, :class => 'btn primary', :remote => true %>
-      <% end %>
-    <% else %>
-      <%= link_to 'Cancel this shift', cancel_signup_event_path(@event), :class => 'btn warning', :remote => true %>
-      <% if @event.repeat? %>
-        <%= link_to 'Cancel all shifts', cancel_all_signups_event_path(@event), :class => 'btn warning', :remote => true %>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <% if can? :edit, Event %>
-    <%= link_to 'View Details', @event, :class => 'btn success' %>
+    <%= link_to 'View Details & Signup', @event, :class => 'btn primary large' %>
+    <%= link_to 'Dismiss', @event, :class => 'btn large', :onclick => "$(this).parents('.qtip').qtip('hide');return false;" %>
+  <% else %>
+    <%= link_to 'View Details', @event, :class => 'btn primary' %>
     <a href="#" id="<%= @event.id %>" class="btn primary edit-event">Edit</a>
     <a href="#" id="<%= @event.id %>" class="btn danger delete-event">Cancel Event</a>
   <% end %>

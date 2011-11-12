@@ -1,6 +1,14 @@
 class EventsController < ApplicationController
   authorize_resource
 
+  def delete_confirmation
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      format.html { render :layout => !request.xhr? }
+    end
+    authorize! :edit, @event
+  end
+
   def new
     @event_series = Event.new
     respond_to do |format|
@@ -10,9 +18,14 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event_series = EventSeries.new(params[:event]).save!
+    @event_series = EventSeries.new(params[:event])
+
     respond_to do |format|
-      format.js
+      if @event_series.save
+        format.js { render :nothing => true }
+      else
+        format.json { render :json => @event_series.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -22,6 +35,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @signup = @event.signups.find_by_user_id(current_user.id) || @event.signups.new
     respond_to do |format|
       format.html { render :layout => !request.xhr? }
     end
@@ -52,39 +66,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def signup
-    @event = Event.find(params[:id])
-    Signup.create!(:event => @event, :event_series => @event.event_series, :user => current_user)
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def signup_all
-    @event = Event.find(params[:id])
-    @event.event_series.events.where(["events.starttime >= ?", @event.starttime]).each do |event|
-      Signup.create!(:user => current_user, :event => event, :event_series => event.event_series )
-    end
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def cancel_signup
-    @event = Event.find(params[:id])
-    current_user.signups.where(:event_id => @event.id).destroy_all
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def cancel_all_signups
-    @event = Event.find(params[:id])
-    current_user.signups.where(:event_series_id => @event.event_series.id).destroy_all
-    respond_to do |format|
-      format.js
-    end
-  end
 
   def edit
     @event = Event.find(params[:id])
@@ -94,28 +75,27 @@ class EventsController < ApplicationController
     authorize! :edit, @event
   end
 
-  def delete_confirmation
-    @event = Event.find(params[:id])
-    respond_to do |format|
-      format.html { render :layout => !request.xhr? }
-    end
-    authorize! :edit, @event
-  end
-
   def update
     @event = Event.find(params[:id])
     if params[:event][:commit_button] == "Update All"
       @events = @event.event_series.events
-      @event.update_events(@events, params[:event])
+      success = @event.update_events(@events, params[:event])
+      errors = @events.errors
     elsif params[:event][:commit_button] == "Update Following Events"
       @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
-      @event.update_events(@events, params[:event])
+      success = @event.update_events(@events, params[:event])
+      errors = @events.errors
     else
       @event.attributes = params[:event]
-      @event.save
+      success = @event.save
+      errors = @event.errors
     end
     respond_to do |format|
-      format.js
+      if success 
+        format.js { render :nothing => true }
+      else
+        format.json { render :json => errors, :status => :unprocessable_entity }
+      end
     end
 
     authorize! :update, @event

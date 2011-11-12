@@ -34,12 +34,10 @@ GEM
     arel (2.2.1)
     babosa (0.3.5)
     bcrypt-ruby (3.0.1)
+    bluecloth (2.2.0)
     builder (3.0.0)
     cancan (1.6.5)
     chronic (0.6.4)
-    ckeditor (3.6.3)
-      mime-types (~> 1.16)
-      orm_adapter (~> 0.0.5)
     default_value_for (1.0.6)
     devise (1.4.8)
       bcrypt-ruby (~> 3.0)
@@ -47,6 +45,7 @@ GEM
       warden (~> 1.0.3)
     erubis (2.7.0)
     fastercsv (1.5.4)
+    friendly_id (4.0.0.beta14)
     heroku (2.9.0)
       launchy (>= 0.3.2)
       rest-client (~> 1.6.1)
@@ -120,6 +119,9 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    twitter_bootstrap_form_for (1.0.2)
+      actionpack (~> 3)
+      railties (~> 3)
     tzinfo (0.3.30)
     warden (1.0.6)
       rack (>= 1.0)
@@ -131,12 +133,13 @@ PLATFORMS
 DEPENDENCIES
   annotate
   babosa
+  bluecloth
   cancan
   chronic
-  ckeditor
   default_value_for
   devise
   fastercsv
+  friendly_id (~> 4.0.0.beta14)
   heroku
   ice_cube (~> 0.6.13)
   jquery-rails
@@ -146,4 +149,5 @@ DEPENDENCIES
   scoped_search
   simple-navigation
   sqlite3-ruby
+  twitter_bootstrap_form_for
   will_paginate
