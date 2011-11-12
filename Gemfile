@@ -23,5 +23,6 @@ gem "bluecloth"
 gem "friendly_id", "~> 4.0.0.beta14"
 gem 'twitter_bootstrap_form_for'
 gem 'rails3-jquery-autocomplete'
+gem 'twitter-bootstrap-rails'
 gem 'heroku', :group => :development
 

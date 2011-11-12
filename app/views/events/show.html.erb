@@ -1,8 +1,6 @@
 <% content_for :title do %>
   <%= @event.title %>
-  <small>
-    <%= @event.starttime.strftime('%1:%M %p on %B %e %Y') %>
-  </small>
+  <small><%= @event.starttime.strftime('%1:%M %p on %B %e %Y') %></small>
 <% end %>
 
 

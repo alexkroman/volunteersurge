@@ -76,7 +76,6 @@
              VolunteerSurge
            <% end %></a>
           <%= render_navigation(:level => 1) %>
-          </ul>
           <div class="pull-right">
             <ul>
             <% if user_signed_in? %>
@@ -102,7 +101,6 @@
       <div class="content">
         <div class="page-header">
           <h1><%= yield :title %></h1>
-          
         </div>
 
         <div class="row">
@@ -110,6 +108,7 @@
             <%- flash.each do |name, msg| -%>
               <%= content_tag :div, msg, :class => 'alert-message block-message success', :id => "flash_#{name}" if msg.is_a?(String) and msg.length > 0 %>
             <%- end -%>
+            <%= render 'layouts/admin_buttons' %>
             <%= yield %>
           </div>
         </div>

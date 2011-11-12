@@ -2,17 +2,11 @@
 // This file is automatically included by javascript_include_tag :defaults
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-twipsy
 //= require_tree
 //= require jquery-ui
 //= require jquery.ui.datepicker
 //= require fullcalendar
-//= require bootstrap-modal
-//= require bootstrap-alerts
-//= require bootstrap-popover
-//= require bootstrap-dropdown
-//= require bootstrap-scrollspy
-//= require bootstrap-tabs
+//= require twitter/bootstrap
 //= require gcal
 //= require jquery.timePicker
 //= require jquery.qtip
