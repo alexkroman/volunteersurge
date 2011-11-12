@@ -1,0 +1,48 @@
+<%= form_for @user, :url => {:action => :create}, :remote => true, :html => {:class => 'form-stacked'} do |f| %>
+
+
+<div class="modal-header">
+  <a href="#" class="close">&times;</a>
+  <h3>Add a new volunteer</h3>
+</div>
+<div class="modal-body">
+  <%= f.hidden_field :subdomain_name, :value => current_subdomain.name %>
+  <%= f.hidden_field :organization_name, :value => current_subdomain.organization %>
+  
+  <div class="clearfix">
+    <%= f.label :name %>
+    <div class="input">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <%= f.label :email %>
+    <div class="input">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+  
+  <div class="clearfix">
+    <%= f.label :password %>
+    <div class="input">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <%= f.label :password_confirmation %>
+    <div class="input">
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-footer">
+  <%=f.submit 'Add Volunteer', :class => 'btn primary' %>
+  <a href="#" class="cancel-button btn secondary" onclick="$('#modal-from-dom').modal('hide');">Cancel</a>
+</div>
+<%end %>
+
+

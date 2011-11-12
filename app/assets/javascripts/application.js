@@ -12,6 +12,44 @@
 //= require jquery.qtip
 //= require autocomplete-rails
 
+$(document).ready(function(){ 
+
+
+$('#new-user').click(function() {
+
+  $('.ui-tooltip').hide();
+
+  $('#modal-from-dom').load("/volunteers/new", function() {
+    $('#errors').hide();
+    $('#modal-from-dom').modal({
+      show : true,
+      keyboard : true,
+      backdrop : true
+    });
+
+    $('#new_user').bind('ajax:error', function(evt, xhr, status, error){
+      var responseObject = $.parseJSON(xhr.responseText),
+      errors = $('<ul />');
+
+      $.each(responseObject, function(name, error){
+        errors.append('<li>' + name + ' ' + error + '</li>');
+      })
+
+      $('#errors').html(errors).show();
+      $('#modal-from-dom').effect("shake", { times:2 }, 100);
+    })
+
+    $('#new_user').bind('ajax:success', function() {  
+      $('#modal-from-dom').modal('hide');
+    });
+
+
+  });
+
+
+});
+
+
 $('#new-event').click(function() {
 
   $('.ui-tooltip').hide();
@@ -61,10 +99,10 @@ function deleteEvent(event_id, delete_all){
         dataType: 'script',
         type: 'post',
         url: "/events/" + event_id,
-		  success: function() {
-    			$('#calendar').fullCalendar( 'refetchEvents');
-				$('#desc_dialog').dialog('destroy');
-  		  }
+        success: function() {
+          $('#calendar').fullCalendar( 'refetchEvents');
+          $('#desc_dialog').dialog('destroy');
+        }
     });
 }
 
@@ -87,8 +125,9 @@ function showPeriodAndFrequency(value){
             $('#period').html('year');
             $('.frequency').show();
             break;
-            
         default:
             $('#frequency').hide();
-    }  
+    }
 }
+
+});

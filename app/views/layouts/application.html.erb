@@ -100,7 +100,14 @@
 
       <div class="content">
         <div class="page-header">
-          <h1><%= yield :title %></h1>
+          <div class="row">
+            <div class="span10">
+              <h1><%= yield :title %></h1>
+            </div>
+            <div class="admin-buttons pull-right">
+              <%= render 'layouts/admin_buttons' %>
+            </div>
+          </div>
         </div>
 
         <div class="row">
@@ -108,7 +115,6 @@
             <%- flash.each do |name, msg| -%>
               <%= content_tag :div, msg, :class => 'alert-message block-message success', :id => "flash_#{name}" if msg.is_a?(String) and msg.length > 0 %>
             <%- end -%>
-            <%= render 'layouts/admin_buttons' %>
             <%= yield %>
           </div>
         </div>
