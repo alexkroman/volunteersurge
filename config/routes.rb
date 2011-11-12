@@ -33,6 +33,7 @@ Rails3SubdomainDevise::Application.routes.draw do
   resources :events do
     collection do
       get :retrieve
+      get :autocomplete_user_name
     end
       
     member do

@@ -6,7 +6,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     if current_subdomain
       primary.item :dashboard, 'Dashboard', dashboard_index_path, :if => Proc.new { can? :create, Event }
-      primary.item :calendar, 'Calendar', events_path
+      primary.item :calendar, 'Schedule', events_path
       if user_signed_in?
         primary.item :calendar, 'My Shifts', shifts_path, :unless => Proc.new { can? :create, Event } 
       end

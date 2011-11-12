@@ -1,0 +1,78 @@
+<% content_for :title do %>
+  <%= @event.title %>
+  <small>
+    <%= @event.starttime.strftime('%1:%M %p on %B %e %Y') %>
+  </small>
+<% end %>
+
+
+<div class="row">
+
+
+  <div class="span9">
+        <h3>People Signed Up</h3>
+
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+          <% @event.signups.each do |signup| %>
+            <tr>
+              <td><%= link_to signup.user.name, signup.user %></td>
+              <td><%= signup.user.email  %></td>
+              <td><%= link_to 'Cancel', signup_path(signup, :event_id => signup.event.id), :confirm => 'Are you sure?', :method => :delete, :class => 'btn danger' %></td>
+            </tr>
+          <% end %>
+        </table>
+
+  </div>
+
+
+
+  <div class="span5">
+
+
+    <div class="well">
+      <h2>Sign someone up</h2>
+      <br /> 
+      <address>
+        <strong>Starts</strong>
+        <br />
+        <%= @event.starttime.strftime('%1:%M %p %B %e %Y') %>
+      </address>
+      <address>
+        <strong>Ends</strong>
+        <br />
+        <%= @event.endtime.strftime('%1:%M %p %B %e %Y') %>
+      </address>
+      <%= form_for @signup, {:html => {:class => 'form-stacked'}} do |f| %>
+        <div class="clearfix">
+          <%=  f.label 'Name of volunteer?' %>
+          <div class="input">
+          <%= f.autocomplete_field :user_to_signup, autocomplete_user_name_events_path %>
+          </div>
+        </div>
+        <div class="clearfix">
+          <%=  f.label 'How many people are coming?' %>
+          <div class="input">
+            <%= f.text_field :number_attending, :class => 'span1' %> 
+            <%= hidden_field_tag :event_id, @event.id %> 
+          </div>
+        </div>
+        <br />
+        <%= submit_tag 'Sign Up', :class => 'btn primary large' %>
+      <% end %>
+    </div>
+
+
+  </div>
+
+
+
+
+
+</div>
+
+

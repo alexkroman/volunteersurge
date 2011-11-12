@@ -44,10 +44,18 @@
   </div>
 
   <div class="clearfix">
-    <div id = "frequency" style = "display:none;">
+    <div class = "frequency" style = "display:none;">
       <%=f.label :frequency, "Repeat every" %>
       <div class="input">
-        <%=f.select :frequency, (1..30).to_a, :class => 'small' %> <span id = "period"></span>
+        <%=f.select :frequency, (1..30).to_a, :class => 'span1' %> <span id = "period"></span>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix">
+    <div class = "frequency" style = "display:none;">
+      <%=f.label "Ends On" %>
+      <div class="input">
+        <%= f.text_field :end_repeat_time, :class => 'small' %>
       </div>
     </div>
   </div>
@@ -58,6 +66,12 @@
   {
     dateFormat: 'yy-mm-dd',
   });
+
+  $('#event_end_repeat_time').datepicker(
+  {
+    dateFormat: 'yy-mm-dd',
+  });
+
 
   $("#event_start_time_time").timePicker	({
     startTime: "09:00",

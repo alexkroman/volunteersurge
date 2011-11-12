@@ -6,6 +6,7 @@ class Signup < ActiveRecord::Base
   belongs_to_multitenant :subdomain
   validates_presence_of :subdomain, :user, :event
   default_value_for :number_attending, 1
+  attr_accessor :user_to_signup
 end
 
 # == Schema Information

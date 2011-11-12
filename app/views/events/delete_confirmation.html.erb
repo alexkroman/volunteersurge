@@ -1,14 +1,20 @@
 <div class="modal-header">
   <a href="#" class="close">&times;</a>
-  <h3>Cancel an event</h3>
+  <h3>You are cancelling an event</h3>
 </div>
 
 <div class="modal-body">
   <% if @event.repeat? %>
   	<% if can? :edit, Event %>
-  	<p><%= button_to 'Cancel only this instance', event_path(@event, :delete_all => 'one'), :class => 'btn danger', :method => :delete, :remote => true %></p>
-  	<p><%= button_to 'Cancel all events in this series', event_path(@event, :delete_all => 'all'), :class => 'btn danger', :method => :delete, :remote => true %></p>
-  	<p><%= button_to 'Cancel all following events', event_path(@event, :delete_all => 'following'), :class => 'btn danger', :method => :delete, :remote => true %></p>
+  	<p><%= button_to 'Cancel only this instance', event_path(@event, :delete_all => 'one'), :class => 'btn danger', :method => :delete, :remote => true %>
+    All other events in this series will remain
+    </p>
+  	<p><%= button_to 'Cancel all following events', event_path(@event, :delete_all => 'following'), :class => 'btn danger', :method => :delete, :remote => true %>
+    This and the following events will be deleted
+    </p>
+  	<p><%= button_to 'Cancel all events in this series', event_path(@event, :delete_all => 'all'), :class => 'btn danger', :method => :delete, :remote => true %>
+    All events in this series will be deleted
+    </p>
   	<% end %>
   <% else %>
   	<% if can? :delete, Event %>

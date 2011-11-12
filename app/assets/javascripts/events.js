@@ -5,9 +5,6 @@
 function attach_events() {
   $('.edit-event').click(function() {
     $('.ui-tooltip').hide();
-    
-    
-    
     jQuery.ajax({
                       type: 'get',
                       url: "/events/" + this.id + "/edit",
@@ -18,7 +15,6 @@ function attach_events() {
                            keyboard : true,
                            backdrop : true
                         });
-                        
                         $('.edit_event').bind('ajax:error', function(evt, xhr, status, error){
                           var responseObject = $.parseJSON(xhr.responseText),
                           errors = $('<ul />');
@@ -35,12 +31,8 @@ function attach_events() {
                           $('#calendar').fullCalendar( 'refetchEvents');
                           $('#modal-from-dom').modal('hide');
                         });
-                        
                       }
                   });
-    
-    
-    
      return false;
   });
   
@@ -131,7 +123,6 @@ $(document).ready(function(){
                             solo: true,
                             modal: true,
                       },
-        
                        hide: {
                           event: 'click',
                           target: $('.close')
@@ -146,17 +137,13 @@ $(document).ready(function(){
                             ajax: {
                                url:  "/events/" + event.id + '/popup', // URL to the local file
                                type: 'GET', // POST or GET
-                               
+                               success: function (data, status) {
+                                 this.set('content.text', data);
+                                 attach_events();
+                               }
                             }
                          },
-                         
                   });
               },
-          
-
-
-
-
       });
   });
-

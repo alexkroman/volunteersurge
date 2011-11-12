@@ -1,6 +1,7 @@
 <% content_for :title do %>
 Dashboard
 <% end %>
+<button id="new-event" class="btn primary">Add Event</button>
 
 <div class="row">
   
@@ -31,7 +32,7 @@ Dashboard
 <table class="zebra-striped">
   <% @signups.each do |signup| %>
   <tr>
-    <td><span class="label success">New</span> <strong><%= link_to signup.user.name, signup.user %></strong> signed up for <strong><%= link_to signup.event.title, @signup %></strong> on <%= signup.event.starttime.strftime('%m/%d') %> <%= time_ago_in_words signup.created_at %> ago</td>
+    <td><span class="label success">New</span> <strong><%= link_to signup.user.name, signup.user %></strong> signed up for <strong><%= link_to signup.event.title, signup.event %></strong> on <%= signup.event.starttime.strftime('%m/%d') %> <%= time_ago_in_words signup.created_at %> ago</td>
   </tr>
   <% end %>
 </table>

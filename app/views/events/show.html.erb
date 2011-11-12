@@ -18,28 +18,6 @@
     <%= BlueCloth.new(current_subdomain.about).to_html.html_safe %>
     <% end %>
 
-
-
-
-
-      <% if can? :edit, Event %>
-
-        <h3>People Signed Up (Administrator Only)</h3>
-
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-          <% @event.users.each do |user| %>
-            <tr>
-              <td><%= link_to user.name, user %></td>
-              <td><%= user.email  %></td>
-            </tr>
-          <% end %>
-        </table>
-
-      <% end %>
   </div>
 
 

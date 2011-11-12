@@ -66,7 +66,7 @@
   </head>
 
   <body>
-
+    <div id="modal-from-dom" class="modal hide fade"></div>
     <div class="topbar">
       <div class="fill">
         <div class="container">
@@ -90,10 +90,8 @@
             <% else %>
             <li><%=link_to 'Sign In', new_user_session_path %></li>
             <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-            
             <% end %>
             </ul>
-            
           </div>
         </div>
       </div>

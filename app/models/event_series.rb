@@ -1,20 +1,18 @@
 class EventSeries < ActiveRecord::Base
   attr_accessor :title, :description, :commit_button, :capacity
-  attr_accessor :start_time_date, :start_time_time, :end_time_date, :end_time_time
-  
+  attr_accessor :start_time_date, :start_time_time, :end_time_date, :end_time_time, :end_repeat_time, :endrepeattime
   validates_presence_of :frequency, :period, :starttime, :endtime
   validates_presence_of :title, :description
-  
   has_many :events, :dependent => :destroy
   belongs_to :subdomain
   belongs_to_multitenant :subdomain
   after_create :create_events_until
-  
   before_validation :format_date
 
    def format_date
      self.starttime = Chronic.parse("#{start_time_date} #{start_time_time}") 
      self.endtime = Chronic.parse("#{end_time_date} #{end_time_time}")
+     self.endrepeattime = Chronic.parse("#{end_repeat_time}") + 1.day
    end
   
   def create_events_until     
@@ -31,7 +29,7 @@ class EventSeries < ActiveRecord::Base
     else
       schedule.add_recurrence_date(starttime)
     end
-    schedule.occurrences_between(starttime, Time.local(2015,1,1)).each do |o|
+    schedule.occurrences_between(starttime, endrepeattime).each do |o|
      events.create(:subdomain_id => self.subdomain_id, :capacity => capacity, :title => title, :description => description, :all_day => all_day, :starttime => o, :endtime => o + duration)
     end
   end

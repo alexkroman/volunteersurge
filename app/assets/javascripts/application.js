@@ -16,11 +16,42 @@
 //= require gcal
 //= require jquery.timePicker
 //= require jquery.qtip
+//= require autocomplete-rails
 
-$(document).ready(function(){ 
-	$( ".button" ).button();
+$('#new-event').click(function() {
+
+  $('.ui-tooltip').hide();
+
+  $('#modal-from-dom').load("/events/new", function() {
+    $('#errors').hide();
+    $('#modal-from-dom').modal({
+      show : true,
+      keyboard : true,
+      backdrop : true
+    });
+
+    $('#new_event').bind('ajax:error', function(evt, xhr, status, error){
+      var responseObject = $.parseJSON(xhr.responseText),
+      errors = $('<ul />');
+
+      $.each(responseObject, function(name, error){
+        errors.append('<li>' + name + ' ' + error + '</li>');
+      })
+
+      $('#errors').html(errors).show();
+      $('#modal-from-dom').effect("shake", { times:2 }, 100);
+    })
+
+    $('#new_event').bind('ajax:success', function() {  
+      $('#calendar').fullCalendar( 'refetchEvents');
+      $('#modal-from-dom').modal('hide');
+    });
+
+
+  });
+
+
 });
-
 
 function editEvent(event_id){
     jQuery.ajax({
@@ -48,19 +79,19 @@ function showPeriodAndFrequency(value){
     switch (value) {
         case 'Daily':
             $('#period').html('day');
-            $('#frequency').show();
+            $('.frequency').show();
             break;
         case 'Weekly':
             $('#period').html('week');
-            $('#frequency').show();
+            $('.frequency').show();
             break;
         case 'Monthly':
             $('#period').html('month');
-            $('#frequency').show();
+            $('.frequency').show();
             break;
         case 'Yearly':
             $('#period').html('year');
-            $('#frequency').show();
+            $('.frequency').show();
             break;
             
         default:

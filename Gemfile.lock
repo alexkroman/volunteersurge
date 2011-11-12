@@ -87,6 +87,8 @@ GEM
       activesupport (= 3.1.1)
       bundler (~> 1.0)
       railties (= 3.1.1)
+    rails3-jquery-autocomplete (1.0.4)
+      rails (~> 3.0)
     railties (3.1.1)
       actionpack (= 3.1.1)
       activesupport (= 3.1.1)
@@ -145,6 +147,7 @@ DEPENDENCIES
   jquery-rails
   multitenant
   rails
+  rails3-jquery-autocomplete
   rufus-scheduler
   scoped_search
   simple-navigation

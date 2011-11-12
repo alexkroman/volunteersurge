@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   authorize_resource
+  autocomplete :user, :name, :full => true
 
   def delete_confirmation
     @event = Event.find(params[:id])
@@ -35,9 +36,15 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @signup = @event.signups.find_by_user_id(current_user.id) || @event.signups.new
+    @signup = @event.signups.find_by_user_id(current_user.id) || Signup.new(:event => @event)
     respond_to do |format|
-      format.html { render :layout => !request.xhr? }
+      format.html do
+        if current_user.admin?
+          render :admin_show
+        else
+          render :show
+        end
+      end
     end
   end
 

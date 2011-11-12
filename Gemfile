@@ -22,5 +22,6 @@ gem 'scoped_search'
 gem "bluecloth"
 gem "friendly_id", "~> 4.0.0.beta14"
 gem 'twitter_bootstrap_form_for'
+gem 'rails3-jquery-autocomplete'
 gem 'heroku', :group => :development
 
