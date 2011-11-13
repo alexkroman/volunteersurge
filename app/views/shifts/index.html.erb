@@ -2,10 +2,16 @@
   My Shifts
 <% end %>
 <table class="zebra-striped">
-  <% @shifts.each do |shift| %>
+  <tr>
+    <th>Name</th>
+    <th>Time</th>
+    <th>Note</th>
+  <% @signups.each do |signup| %>
     <tr>
-      <td><h4><%=link_to shift.title, shift %></h4><%= shift.starttime.strftime('%B %e at %l:%M%p') %></td>
+      <td><%=link_to signup.event.title, signup.event %></td>
+      <td><%= signup.event.starttime.strftime('%B %e at %l:%M%p') %></td>
+      <td><%= signup.description %></td>
     </tr>
   <% end %>
 </table>
-<%= will_paginate @volunteers %>
+<%= will_paginate @signups %>

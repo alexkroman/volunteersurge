@@ -58,6 +58,12 @@
             <%= hidden_field_tag :event_id, @event.id %> 
           </div>
         </div>
+        <div class="clearfix">
+          <%=  f.label 'Optional Note' %>
+          <div class="input">
+            <%= f.text_field :description %> 
+          </div>
+        </div>
         <br />
         <%= submit_tag 'Sign Up', :class => 'btn primary large' %>
       <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111105231024) do
+ActiveRecord::Schema.define(:version => 20111113000537) do
 
   create_table "event_series", :force => true do |t|
     t.integer  "frequency",    :default => 1
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20111105231024) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "number_attending"
+    t.text     "description"
   end
 
   create_table "subdomains", :force => true do |t|

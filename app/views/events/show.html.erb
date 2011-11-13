@@ -8,6 +8,7 @@
 
 
   <div class="span9">
+    <h3>Description</h3>
 
           <p><%= @event.description %></p>
 
@@ -47,6 +48,12 @@
           <div class="input">
             <%= f.text_field :number_attending, :class => 'span1' %> 
             <%= hidden_field_tag :event_id, @event.id %> 
+          </div>
+        </div>
+        <div class="clearfix">
+          <%=  f.label 'Optional Note' %>
+          <div class="input">
+            <%= f.text_field :description %> 
           </div>
         </div>
         <br />

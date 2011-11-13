@@ -1,6 +1,6 @@
 class ShiftsController < ApplicationController
   def index
-    @shifts = current_user.events.paginate(:page => params[:page]) if user_signed_in?
+    @signups = current_user.signups.paginate(:page => params[:page]) 
   end
 
 end

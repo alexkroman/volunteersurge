@@ -2,7 +2,7 @@ class SignupsController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     user = params[:signup][:user_to_signup] ? User.find_by_name(params[:signup][:user_to_signup]) : current_user
-    Signup.create!(:event => @event, :event_series => @event.event_series, :user => user)
+    Signup.create!(:event => @event, :event_series => @event.event_series, :user => user, :description => params[:signup][:description])
     respond_to do |format|
       format.html { redirect_to @event }
     end

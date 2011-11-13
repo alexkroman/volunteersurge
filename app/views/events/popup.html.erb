@@ -20,8 +20,8 @@
     <%= link_to 'View Details & Signup', @event, :class => 'btn primary large' %>
     <%= link_to 'Dismiss', @event, :class => 'btn large', :onclick => "$(this).parents('.qtip').qtip('hide');return false;" %>
   <% else %>
-    <%= link_to 'View Details', @event, :class => 'btn primary' %>
+    <%= link_to 'Details & Signup', @event, :class => 'btn success' %>
     <a href="#" id="<%= @event.id %>" class="btn primary edit-event">Edit</a>
-    <a href="#" id="<%= @event.id %>" class="btn danger delete-event">Cancel Event</a>
+    <a href="#" id="<%= @event.id %>" class="btn danger delete-event">Cancel</a>
   <% end %>
 </div>
