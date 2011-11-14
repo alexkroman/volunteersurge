@@ -7,10 +7,10 @@ class Ability
       can :manage, :all
     elsif user.id != nil
       can :signup, :all
-      can :signup_all, :all
-      can :cancel_signup, :all
-      can :cancel_all_signups, :all
       can :dashboard, :all
+      can :create, Signup
+      can :destroy, Signup
+      can :complete, Event
     end
     can :faq, :all
     can :read, :all

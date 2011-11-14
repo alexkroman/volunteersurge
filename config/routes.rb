@@ -37,12 +37,9 @@ Rails3SubdomainDevise::Application.routes.draw do
     end
       
     member do
+      get :complete
       get :delete_confirmation
       get :popup
-      get :signup
-      get :signup_all
-      get :cancel_signup
-      get :cancel_all_signups
     end
   end
   

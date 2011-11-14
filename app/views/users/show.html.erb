@@ -1,4 +1,18 @@
 <% content_for :title do %>
-<%= @user.name %>
+  <%= @user.name %>
 <% end %>
 <p>Email: <%= @user.email %></p>
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Start Time</th>
+    <th>Actions</th>
+  </tr>
+  <% @user.signups.each do |signup| %>
+    <tr>
+      <td><%= link_to signup.event.title, signup.event %></td>
+      <td><%= signup.event.starttime %></td>
+      <td><%= link_to 'Cancel', signup_path(signup, :event_id => signup.event.id), :confirm => 'Are you sure?', :method => :delete, :class => 'btn danger' %></td>
+    </tr>
+  <% end %>
+</table>

@@ -25,7 +25,7 @@
 
 
     <div class="well">
-      <% unless @signup.user == current_user %>
+      <% if @signup.user != current_user or @signup.id == nil %>
       <h2>Sign up for this shift</h2>
 <% else %>
       <h2>You are signed up</h2>
@@ -41,13 +41,14 @@
         <br />
         <%= @event.endtime.strftime('%1:%M %p %B %e %Y') %>
       </address>
-      <% unless @signup.user == current_user %>
+      <% if @signup.user != current_user or @signup.id == nil %>
+      <% if @event.starttime > Time.now %>
       <%= form_for @signup, {:html => {:class => 'form-stacked'}} do |f| %>
         <div class="clearfix">
           <%=  f.label 'How many people are coming?' %>
           <div class="input">
             <%= f.text_field :number_attending, :class => 'span1' %> 
-            <%= hidden_field_tag :event_id, @event.id %> 
+            <%= f.hidden_field :event_id %> 
           </div>
         </div>
         <div class="clearfix">
@@ -59,8 +60,11 @@
         <br />
         <%= submit_tag 'Sign Up', :class => 'btn primary large' %>
       <% end %>
+    <% else %>
+      Signups are closed for this event
+    <% end %>
       <% else %>
-        <%= link_to 'Cancel your attendance', signup_path(@signup, :event_id => @event.id), :confirm => 'Are you sure?', :method => :delete, :class => 'btn danger large' %>
+        <%= link_to 'Cancel your attendance', signup_path(@signup), :confirm => 'Are you sure?', :method => :delete, :class => 'btn danger large' %>
       <% end %>
     </div>
 

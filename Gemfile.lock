@@ -38,6 +38,9 @@ GEM
     builder (3.0.0)
     cancan (1.6.5)
     chronic (0.6.4)
+    ckeditor (3.6.3)
+      mime-types (~> 1.16)
+      orm_adapter (~> 0.0.5)
     default_value_for (1.0.6)
     devise (1.4.8)
       bcrypt-ruby (~> 3.0)
@@ -151,6 +154,7 @@ DEPENDENCIES
   bluecloth
   cancan
   chronic
+  ckeditor
   default_value_for
   devise
   fastercsv

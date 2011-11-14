@@ -24,5 +24,7 @@ gem "friendly_id", "~> 4.0.0.beta14"
 gem 'twitter_bootstrap_form_for'
 gem 'rails3-jquery-autocomplete'
 gem 'twitter-bootstrap-rails'
+gem 'ckeditor'
+gem 'simple_form'
 gem 'heroku', :group => :development
 

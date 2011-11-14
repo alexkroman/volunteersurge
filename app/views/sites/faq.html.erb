@@ -1,4 +1,4 @@
 <% content_for :title do %>
 FAQ
 <% end %>
-<%= BlueCloth.new(current_subdomain.faq).to_html.html_safe %>
+<%= current_subdomain.faq.html_safe %>

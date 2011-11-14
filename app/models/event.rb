@@ -64,11 +64,11 @@ class Event < ActiveRecord::Base
   end
   
   def spots_left
-    capacity - signups_count if capacity
+    capacity - signups.size if capacity
   end
   
   def spots_filled
-    signups.size
+    signups.number_attending.count
   end
   
   def validate

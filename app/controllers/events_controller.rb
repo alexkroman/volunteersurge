@@ -1,5 +1,4 @@
 class EventsController < ApplicationController
-  authorize_resource
   autocomplete :user, :name, :full => true
 
   def delete_confirmation
@@ -8,6 +7,11 @@ class EventsController < ApplicationController
       format.html { render :layout => !request.xhr? }
     end
     authorize! :edit, @event
+  end
+
+  def complete
+
+  
   end
 
   def new
@@ -36,10 +40,13 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @signup = @event.signups.find_by_user_id(current_user.id) || Signup.new(:event => @event)
+    if user_signed_in? and !current_user.admin? 
+      @signup = @event.signups.find_by_user_id(current_user.id)
+    end
+    @signup = Signup.new(:event => @event) unless @signup
     respond_to do |format|
       format.html do
-        if current_user.admin?
+        if user_signed_in? and current_user.admin?
           render :admin_show
         else
           render :show

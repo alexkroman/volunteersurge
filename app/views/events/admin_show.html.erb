@@ -14,12 +14,14 @@
         <tr>
           <th>Name</th>
           <th>Email</th>
+          <th>Number</th>
           <th>Actions</th>
         </tr>
         <% @event.signups.each do |signup| %>
           <tr>
             <td><%= link_to signup.user.name, signup.user %></td>
             <td><%= signup.user.email  %></td>
+            <td><%= signup.number_attending  %></td>
             <td><%= link_to 'Cancel', signup_path(signup, :event_id => signup.event.id), :confirm => 'Are you sure?', :method => :delete, :class => 'btn danger' %></td>
           </tr>
         <% end %>
@@ -55,7 +57,7 @@
           <%=  f.label 'How many people are coming?' %>
           <div class="input">
             <%= f.text_field :number_attending, :class => 'span1' %> 
-            <%= hidden_field_tag :event_id, @event.id %> 
+            <%= f.hidden_field :event_id %> 
           </div>
         </div>
         <div class="clearfix">
